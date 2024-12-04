@@ -32,14 +32,14 @@ System.out.println("~");
 
 class Solution
 {
-    public List<String> getNeighbour(String word,HashSet<String> set){
-        List<String> neighbours = new ArrayList<>();
-        for(int i=0; i<word.length(); i++){
-            for(char ch ='a'; ch<='z'; ch++){
-                if(ch == word.charAt(i)){
+    public ArrayList<String> getNeighbours(String curString,HashSet<String> set){
+        ArrayList<String> neighbours = new ArrayList<>();
+        for(int i=0; i<curString.length(); i++){
+            for(char ch = 'a'; ch <= 'z'; ch++){
+                if(ch == curString.charAt(i)){
                     continue;
                 }
-                String newWord = word.substring(0,i)+ch+word.substring(i+1,word.length());
+                String newWord = curString.substring(0,i) + ch + curString.substring(i+1,curString.length());
                 if(set.contains(newWord)){
                     neighbours.add(newWord);
                 }
@@ -51,7 +51,6 @@ class Solution
     {
         // Code here
         HashSet<String> set = new HashSet<>(Arrays.asList(wordList));
-        
         if(!set.contains(targetWord)){
             return 0;
         }
@@ -59,24 +58,27 @@ class Solution
         Queue<String> q = new LinkedList<>();
         q.add(startWord);
         
+        // if startWord present in set remove it 
         if(set.contains(startWord)){
             set.remove(startWord);
         }
         
         int level = 0;
+        
         while(!q.isEmpty()){
             int curLevelSize = q.size();
             // level wise traversal
             for(int i=0; i<curLevelSize; i++){
-                String node = q.remove();
-                if(node.equals(targetWord)){
+                String curString = q.remove();
+                if(curString.equals(targetWord)){
                     return level+1;
                 }
-                List<String> neighbours = getNeighbour(node,set);
-                
+                ArrayList<String> neighbours = getNeighbours(curString,set);
                 for(String neighbour : neighbours){
-                    q.add(neighbour);
-                    set.remove(neighbour);
+                    if(set.contains(neighbour)){
+                        q.add(neighbour);
+                        set.remove(neighbour);
+                    }
                 }
             }
             level++;
@@ -85,3 +87,19 @@ class Solution
         return 0;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
