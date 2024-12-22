@@ -35,30 +35,23 @@ class GFG {
 
 
 class Solution {
-    public boolean checkIfCycle(int src,ArrayList<ArrayList<Integer>> adj,boolean visited[]){
-        Queue<int[]> q = new LinkedList<>();
-        
-        q.add(new int[]{src,-1});
+    public boolean checkIfCycle(int src,int parent,ArrayList<ArrayList<Integer>> adj,boolean visited[]){
         visited[src] = true;
-        while(!q.isEmpty()){
-            int pair[] = q.remove();
-            int node = pair[0];
-            int parent = pair[1];
-            for(int neighbour : adj.get(node)){
-                if(neighbour == parent){
-                    continue;
-                }
-                if(visited[neighbour]){
+        for(int neighbour : adj.get(src)){
+            if(neighbour == parent){
+                continue;
+            }
+            
+            if(visited[neighbour]){
+                return true;
+            }else{
+                if(checkIfCycle(neighbour,src,adj,visited)){
                     return true;
-                }else{
-                    q.add(new int[]{neighbour,node});
-                    visited[neighbour]= true;
                 }
             }
         }
         
         return false;
-        
     }
     // Function to detect cycle in an undirected graph.
     public boolean isCycle(ArrayList<ArrayList<Integer>> adj) {
@@ -66,7 +59,7 @@ class Solution {
         boolean visited[] = new boolean[adj.size()];
         
         for(int i=0; i<adj.size(); i++){
-            if(!visited[i] && checkIfCycle(i,adj,visited)){
+            if(!visited[i] && checkIfCycle(i,-1,adj,visited)){
                 return true;
             }
         }
