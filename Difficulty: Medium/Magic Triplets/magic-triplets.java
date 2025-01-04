@@ -43,12 +43,12 @@ class Solution{
         
         for(int i=0; i<n; i++){
             int curr = arr[i];
-            for(int j=0; j<i; j++){
+            for(int j=0; j<i; j++){  //To iterate on left side of a value
                 if(arr[j] < curr){
                     leftSmall[i]++;
                 }
             }
-            for(int j=i; j<n; j++){
+            for(int j=i; j<n; j++){  //To iterate on right side of a value
                 if(arr[j] > curr){
                     rightGreat[i]++;
                 }
