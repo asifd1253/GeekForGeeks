@@ -39,50 +39,82 @@ public class Main {
 // User function Template for Java
 
 class Solution {
+    
     static int spanningTree(int V, int E, List<List<int[]>> adj) {
         // Code Here.
-        // (parent, node, weight)
         PriorityQueue<int[]> pq = new PriorityQueue<>(new Comparator<>(){
-            public int compare(int pair1[],int pair2[]){
+            public int compare(int pair1[], int pair2[]){
                 return pair1[2] - pair2[2];
             }
         });
-        pq.add(new int[]{-1,0,0});
         
-        boolean visit[] = new boolean[V];
-        int sum = 0;
-        List<int[]> edges = new ArrayList<>();
-        
-        while(!pq.isEmpty()){
-            int object[] = pq.poll();
-            int parent = object[0];
-            int node = object[1];
-            int weight = object[2];
-            
-            // if the node already visited
-            if(visit[node]){
-                continue;
-            }
-            
-            visit[node] = true;
-            
-            if(parent != -1){
-                edges.add(new int[]{parent,node});
-                sum += weight;
-            }
-            
-            for(int neighbourObject[] : adj.get(node)){
-                int neighbourNode = neighbourObject[0];
-                int neighbourWeight = neighbourObject[1];
-                
-                if(!visit[neighbourNode]){
-                    pq.add(new int[]{node,neighbourNode,neighbourWeight});
-                }
-        
+        for(int i=0; i<V; i++){
+            for(int edge[] : adj.get(i)){
+                pq.add(new int[]{i,edge[0],edge[1]});
             }
         }
         
+        DisJointSet dsu = new DisJointSet(V);
+        int sum = 0;
+        
+        while(!pq.isEmpty()){
+            int edge[] = pq.remove();
+            int u = edge[0];
+            int v = edge[1];
+            int w = edge[2];
+            
+            if(dsu.unionBySize(u,v)){
+                sum += w;
+            }
+        }
         
         return sum;
+        
     }
 }
+
+class DisJointSet{
+        int parent[];
+        int size[];
+        
+        DisJointSet(int nodes){
+            this.parent = new int[nodes];
+            this.size = new int[nodes];
+            
+            for(int i=0; i<nodes; i++){
+                parent[i] = i;
+                size[i] = 1;
+            }
+        }
+        
+        public boolean unionBySize(int node1, int node2){
+            int rootParent1 = findRootParent(node1);
+            int rootParent2 = findRootParent(node2);
+            
+            // if root parent is same means continue
+            if(rootParent1 == rootParent2){
+                return false;  //the nodes will not make union
+            }
+            
+            // else union the component
+            if(size[rootParent1] < size[rootParent2]){
+                parent[rootParent1] = rootParent2;
+                size[rootParent2] += size[rootParent1];
+            }else{
+                parent[rootParent2] = rootParent1;
+                size[rootParent1] += size[rootParent2];
+            }
+            
+            return true;  //the nodes will become union
+        }
+        
+        public int findRootParent(int node){
+            if(node == parent[node]){
+                return node;
+            }
+            
+            parent[node] = findRootParent(parent[node]);
+            
+            return parent[node];
+        }
+    }
