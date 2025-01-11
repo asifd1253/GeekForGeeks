@@ -1,4 +1,5 @@
 // User function Template for Java
+// Time Complexity : 2^n
 
 class Solution {
     public int nthFibonacci(int n) {
