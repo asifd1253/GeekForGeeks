@@ -5,7 +5,7 @@ class Solution {
     public int nthFibonacci(int n) {
         // code here
         // base case
-        if(n <=1){
+        if(n == 0 || n == 1){
             return n;
         }
         
