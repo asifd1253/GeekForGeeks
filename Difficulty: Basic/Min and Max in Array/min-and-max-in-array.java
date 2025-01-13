@@ -36,18 +36,20 @@ For Example -> return new Pair(minimum,maximum)
 class Solution {
     public Pair<Integer, Integer> getMinMax(int[] arr) {
         // Code Here
+        // int min = arr[0];
+        // int max = arr[0];
+        
+        // for(int i=1; i<arr.length; i++){
+        //     if(min > arr[i]){
+        //         min = arr[i];
+        //     }
+        //     if(max < arr[i]){
+        //         max = arr[i];
+        //     }
+        // }
+        Arrays.sort(arr);
         int min = arr[0];
-        int max = arr[0];
-        
-        for(int i=1; i<arr.length; i++){
-            if(arr[i] < min){
-                min = arr[i];
-            }
-            if(arr[i] > max){
-                max = arr[i];
-            }
-        }
-        
+        int max = arr[arr.length-1];
         return new Pair(min,max);
     }
 }
