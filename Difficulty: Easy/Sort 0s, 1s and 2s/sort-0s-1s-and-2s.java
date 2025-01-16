@@ -36,7 +36,6 @@ class Solution {
         int zero = 0;
         int one = 0;
         int two = 0;
-        
         for(int i=0; i<arr.length; i++){
             if(arr[i] == 0){
                 zero++;
@@ -47,17 +46,17 @@ class Solution {
             }
         }
         
-        for(int i=0; i<arr.length; i++){
-            if(zero != 0){
-                arr[i] = 0;
-                zero--;
-            }else if (one != 0){
-                arr[i] = 1;
-                one--;
-            }else{
-                arr[i] = 2;
-                two--;
-            }
+        int idx = 0;
+        for(int i=0; i<zero; i++){
+            arr[idx++] = 0;
+        }
+        
+        for(int i=0; i<one; i++){
+            arr[idx++] = 1;
+        }
+        
+        for(int i=0; i<two; i++){
+            arr[idx++] = 2;
         }
     }
 }
