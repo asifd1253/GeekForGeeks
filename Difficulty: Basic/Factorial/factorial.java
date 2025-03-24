@@ -21,10 +21,11 @@ class GFG {
 class Solution {
     static int factorial(int n) {
         // code here
-        if(n == 1 || n == 0){
-            return 1;
+        int result = 1;
+        for(int i=n; i>=1; i--){
+            result = result * i;
         }
         
-        return n*factorial(n-1);
+        return result;
     }
 }
