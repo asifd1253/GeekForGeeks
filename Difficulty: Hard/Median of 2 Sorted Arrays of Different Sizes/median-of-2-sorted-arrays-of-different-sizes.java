@@ -43,33 +43,65 @@ class Solution {
         // Your Code Here
         int m = a.length;
         int n = b.length;
+        int size = m+n;
         
-        int temp[] = new int[m+n];
+        int idx1 = (size/2)-1;
+        int idx2 = size/2;
         
         int i=0, j=0, k=0;
+        
+        int ele1 = -1;
+        int ele2 = -1;
+        
         while(i < m && j < n){
             if(a[i] < b[j]){
-                temp[k++] = a[i++];
+                if(k == idx1){
+                    ele1 = a[i];
+                }
+                if(k == idx2){
+                    ele2 = a[i];
+                }
+                i++;
+                k++;
             }else{
-                temp[k++] = b[j++];
+                if(k == idx1){
+                    ele1 = b[j];
+                }
+                if(k == idx2){
+                    ele2 = b[j];
+                }
+                j++;
+                k++;
             }
         }
         
         while(i < m){
-            temp[k++] = a[i++];
+            if(k == idx1){
+                ele1 = a[i];
+            }
+            if(k == idx2){
+                ele2 = a[i];
+            }
+            i++;
+            k++;
         }
         
         while(j < n){
-            temp[k++] = b[j++];
+            if(k == idx1){
+                ele1 = b[j];
+            }
+            if(k == idx2){
+                ele2 = b[j];
+            }
+            j++;
+            k++;
         }
-        
-        int size = m+n;
         
         if(size%2 != 0){
-            return temp[size/2];
+            return ele2;
         }
         
-        return (temp[size/2] + temp[(size/2)-1])/2.0;
+        return (ele1+ele2)/2.0;
         
     }
 }
