@@ -28,14 +28,11 @@ System.out.println("~");
 // } Driver Code Ends
 
 
-//User function Template for Java
+// User function Template for Java
 
-
-class Solution
-{
-	public static int kthSmallest(int[][]mat,int n,int k)
-	{
-        //code here.
+class Solution {
+    public static int kthSmallest(int[][] mat, int n, int k) {
+        // code here.
         ArrayList<Integer> arr = new ArrayList<>();
         
         for(int i=0; i<n; i++){
