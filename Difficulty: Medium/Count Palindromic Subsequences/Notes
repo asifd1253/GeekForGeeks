@@ -19,33 +19,79 @@ dp[0][0] = 1  -> 'a'
 dp[1][1] = 1  -> 'a'
 dp[2][2] = 1  -> 'b'
 
-gap = 1:
-i=0, j=1 → s[0] == s[1] → dp[0][1] = 1 + 1 + 1 = 3
-         ('a', 'a', 'aa')
-i=1, j=2 → s[1] != s[2] → dp[1][2] = 1 + 1 - 0 = 2
+     0   1   2
+   ┌───┬───┬───┐
+ 0 │ 1 │   │   │
+   ├───┼───┼───┤
+ 1 │   │ 1 │   │
+   ├───┼───┼───┤
+ 2 │   │   │ 1 │
+   └───┴───┴───┘
 
-gap = 2:
-i=0, j=2 → s[0] != s[2] → dp[0][2] = 2 + 2 - 1 = 3
+Substring from i=0 to j=1 → "aa"
+Since s[0] == s[1] → matching characters
+dp[0][1] = dp[1][1] + dp[0][0] + 1
+         = 1 + 1 + 1 = 3
+What are they?
+"a" (index 0)
+"a" (index 1)
+"aa"
 
-Final answer → dp[0][2] = 4
+     0   1   2
+   ┌───┬───┬───┐
+ 0 │ 1 │ 3 │   │
+   ├───┼───┼───┤
+ 1 │   │ 1 │   │
+   ├───┼───┼───┤
+ 2 │   │   │ 1 │
+   └───┴───┴───┘
 
+Substring from i=0 to j=2 → "aab"
+a != b → mismatch
 
-This is the core logic. Let’s break it down beautifully:
+dp[0][2] = dp[1][2] + dp[0][1] - dp[1][1]
+         = 2 + 3 - 1 = 4
 
-1. If s[i] == s[j]:
-You found a new pair that can wrap any palindrome inside it.
-So:dp[i][j] = dp[i+1][j] + dp[i][j-1] + 1
+What are the palindromic subsequences?
+'a' (index 0)
+'a' (index 1)
+'b' (index 2)
+'aa'
 
-Part	What it means
-dp[i+1][j]	Count without including the current i character
-dp[i][j-1]	Count without including the current j character
-+1	For the new pair s[i] and s[j] (since they are equal)
+     0   1   2
+   ┌───┬───┬───┐
+ 0 │ 1 │ 3 │ 4 │
+   ├───┼───┼───┤
+ 1 │   │ 1 │ 2 │
+   ├───┼───┼───┤
+ 2 │   │   │ 1 │
+   └───┴───┴───┘
 
-2. If s[i] != s[j]:
-You can't form a new palindrome with both ends. 
-So:dp[i][j] = dp[i+1][j] + dp[i][j-1] - dp[i+1][j-1]
+Case 1: If s[i] == s[j]
+dp[i][j] = dp[i+1][j] + dp[i][j-1] + 1
 
-Part	What it means
-dp[i+1][j]	Count excluding the left character s[i]
-dp[i][j-1]	Count excluding the right character s[j]
-- dp[i+1][j-1]	Remove double-counted part in the middle
+🧩 Think of:
+s = a...a
+     ^   ^
+     i   j
+
+We include:
+All palindromes excluding i → dp[i+1][j]
+All palindromes excluding j → dp[i][j-1]
++1 new one: 'a' + (middle palindromes) + a' → at least 'aa'
+
+Case 2: If s[i] != s[j]
+dp[i][j] = dp[i+1][j] + dp[i][j-1] - dp[i+1][j-1]
+
+Imagine:
+s = a...b
+     ^   ^
+     i   j
+
+You take:
+Palindromes without left → dp[i+1][j]
+Palindromes without right → dp[i][j-1]
+But you added dp[i+1][j-1] twice → so subtract it once.
+This is called inclusion-exclusion principle.
+
+This is the core logic. 
