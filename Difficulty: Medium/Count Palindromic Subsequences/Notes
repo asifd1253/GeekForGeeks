@@ -1,0 +1,51 @@
+Given a string s, count how many palindromic subsequences it has.
+A subsequence is a sequence derived by deleting 0 or more characters without changing the order.
+A palindromic subsequence is a subsequence that is the same forward and backward.
+You need to count all such palindromic subsequences (not just distinct ones)
+
+Input: "aab"
+Subsequences:
+'a', 'a', 'b', 'aa'
+→ All are palindromic → Answer = 4
+
+Input: "aaa"
+All palindromic subsequences:
+'a', 'a', 'a', 'aa', 'aa', 'aaa'
+→ Answer = 6
+
+Step by step:
+gap = 0:
+dp[0][0] = 1  -> 'a'
+dp[1][1] = 1  -> 'a'
+dp[2][2] = 1  -> 'b'
+
+gap = 1:
+i=0, j=1 → s[0] == s[1] → dp[0][1] = 1 + 1 + 1 = 3
+         ('a', 'a', 'aa')
+i=1, j=2 → s[1] != s[2] → dp[1][2] = 1 + 1 - 0 = 2
+
+gap = 2:
+i=0, j=2 → s[0] != s[2] → dp[0][2] = 2 + 2 - 1 = 3
+
+Final answer → dp[0][2] = 4
+
+
+This is the core logic. Let’s break it down beautifully:
+
+1. If s[i] == s[j]:
+You found a new pair that can wrap any palindrome inside it.
+So:dp[i][j] = dp[i+1][j] + dp[i][j-1] + 1
+
+Part	What it means
+dp[i+1][j]	Count without including the current i character
+dp[i][j-1]	Count without including the current j character
++1	For the new pair s[i] and s[j] (since they are equal)
+
+2. If s[i] != s[j]:
+You can't form a new palindrome with both ends. 
+So:dp[i][j] = dp[i+1][j] + dp[i][j-1] - dp[i+1][j-1]
+
+Part	What it means
+dp[i+1][j]	Count excluding the left character s[i]
+dp[i][j-1]	Count excluding the right character s[j]
+- dp[i+1][j-1]	Remove double-counted part in the middle
