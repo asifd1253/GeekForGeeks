@@ -1,0 +1,32 @@
+INPUT
+row‑0 → you   we
+row‑1 → have  are
+row‑2 → lunch sleep
+
+OUTPUT
+                             (root)
+                               ↓
+                            [row 0]
+                         ┌────┴────┐
+                      "you"       "we"
+                       ↓            ↓
+                    [row 1]       [row 1]
+                  ┌────┴────┐   ┌────┴────┐
+               "have"    "are" "have"   "are"
+                ↓          ↓     ↓        ↓
+              [row 2]    [row 2] [row 2] [row 2]
+            ┌───┴───┐  ┌───┴───┐    ┌─┴──--─┐  ┴───-------┌───-----┐
+            |       |  |       |--┐ |-----┐ |-----┐       |        |
+        "lunch" "sleep" "lunch" "sleep" "lunch" "sleep" "lunch" "sleep"
+
+Final Sentences (Leaf Nodes):
+─────────────────────────────
+"you have lunch"  
+"you have sleep"  
+"you are lunch"  
+"you are sleep"  
+"we have lunch"  
+"we have sleep"  
+"we are lunch"  
+"we are sleep"  
+
