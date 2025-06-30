@@ -4,20 +4,12 @@ class Solution {
         int reverse = 0;
         int temp = n;
         
-        while(temp >= 0){
-            int lastDigit;
-            if(temp %10 == 0){
-                temp = temp/10;
-                continue;
-            }else{
-                lastDigit = temp%10;
-            }
-            
-            reverse = reverse + lastDigit;
-            temp = temp-10;
+        while(temp > 0){
+            int lastDigit = temp % 10;
+            reverse = reverse * 10 + lastDigit;
+            temp = temp / 10;
         }
         
         return (int)Math.pow(n, reverse);
     }
 }
-                                                                                                                    
