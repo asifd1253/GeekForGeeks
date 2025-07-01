@@ -1,0 +1,156 @@
+❓ What We Are Doing
+Let’s break this down:
+
+Step 1: Sort the array
+[1, 5, 8, 10] → Sorted ✅
+
+Because we need to talk about smallest and largest values easily.
+
+Step 2: Initial Difference (Before Any Change)
+Biggest = 10
+Smallest = 1
+
+diff = 10 - 1 = 9
+We want to reduce this number!
+
+Step 3: Try Changing Values with +K and -K
+We are going to try different ways of choosing:
+
+Some elements to do +K
+
+Other elements to do -K
+
+And see which gives the smallest difference between tallest and shortest tower.
+
+💡 Very Clear Approach (Split Logic)
+We try this logic:
+
+For a position i (from 0 to n-2)
+
+All elements from index 0 to i → do +K
+
+All elements from i+1 to end → do -K
+
+Then calculate:
+
+Minimum value in new array
+
+Maximum value in new array
+
+Take the difference → keep the smallest one
+
+🧮 Dry Run
+Let’s do the dry run step-by-step:
+
+✅ Initial Setup
+Sorted array: [1, 5, 8, 10]
+k = 2
+We are going to try splitting after every index from 0 to 2.
+
+🔹 Try Split at i = 0
+Apply +K to: [1] → [3]
+Apply -K to: [5, 8, 10] → [3, 6, 8]
+Now the array is:
+[3, 3, 6, 8]
+Smallest = 3
+Largest = 8
+Difference = 5 ✅
+
+🔹 Try Split at i = 1
++K → [1, 5] → [3, 7]
+-K → [8, 10] → [6, 8]
+New array:
+[3, 7, 6, 8]
+Smallest = 3
+Largest = 8
+Difference = 5 ✅
+
+🔹 Try Split at i = 2
++K → [1, 5, 8] → [3, 7, 10]
+-K → [10] → [8]
+New array:  [3, 7, 10, 8]
+Smallest = 3
+Largest = 10
+Difference = 7 ❌ (Worse)
+
+✅ Best Result
+Best minimum difference = 5
+
+💡 Summary of Intuition
+We:
+
+Try different ways to balance the tall and short towers.
+
+Use +K to make small towers bigger.
+
+Use -K to make big towers smaller.
+
+Check how close the smallest and tallest become.
+
+Keep the best one.
+
+
+
+
+
+
+
+
+
+
+
+
+💡 First, What's Our Goal Again?
+We want to minimize the difference between the tallest and shortest tower after either adding or subtracting K from each tower exactly once.
+
+✅ High-Level Plan:
+We already did a dry run where we try:
+
+Increase heights of the first i + 1 towers by K
+
+Decrease heights of the rest towers from i+1 to n-1 by K
+
+So this loop does that automatically in a smart way.
+
+💡 Step-by-Step Explanation
+Let’s walk through each line of that code 👇
+
+🔁 for(int i = 0; i < n - 1; i++)
+We are trying every possible "split point" in the array:
+
+Where we say:
+Towers 0 to i → increase by K
+Towers i+1 to n-1 → decrease by K
+
+We try all valid splits from start to second-last index.
+
+🧮 Line: int min = Math.min(smallest, arr[i+1] - k);
+We are trying to calculate the smallest height in the modified array for this split.
+
+arr[i+1] - k: Because we're decreasing the height of towers from i+1 onward
+
+smallest = arr[0] + k: This is the increased value of the first tower
+
+So we compare both and pick the smaller one → that will be the shortest tower in the new array.
+
+🧮 Line: int max = Math.max(largest, arr[i] + k);
+We are calculating the tallest tower after modification.
+
+arr[i] + k: Because we're increasing height up to index i
+
+largest = arr[n - 1] - k: This is the decreased value of the last tower
+
+We compare both and pick the larger one → this will be the tallest tower in the new array.
+
+⚠️ Line: if(min < 0) continue;
+Very important!
+👉 Because heights can’t be negative, so we skip any case where:
+
+arr[i+1] - k < 0
+This happens when we try to reduce a small number by K and it becomes negative — which is not allowed.
+
+✅ Line: ans = Math.min(ans, max - min);
+This is the core line — update the answer with the smallest height difference we’ve found so far.
+
+We always want:
+max - min → as small as possible ✅
