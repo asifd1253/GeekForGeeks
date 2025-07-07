@@ -1,80 +1,50 @@
-//{ Driver Code Starts
-import java.io.*;
-import java.util.*;
-
-class Sorting {
-    public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int t = Integer.parseInt(br.readLine());
-        for (int g = 0; g < t; g++) {
-            String[] str = (br.readLine()).trim().split(" ");
-            int arr[] = new int[str.length];
-            for (int i = 0; i < str.length; i++) arr[i] = Integer.parseInt(str[i]);
-            System.out.println(new Solution().inversionCount(arr));
-            System.out.println("~");
-        }
-    }
-}
-// } Driver Code Ends
-
-
 // User function Template for Java
 
 class Solution {
-    
-    static int merge(int arr[], int st, int mid, int end){
-        int invCount = 0;
-        int i=st;
-        int j=mid+1;
-        ArrayList<Integer> temp = new ArrayList<>();
+    static int merge(int arr[], int left, int mid, int right){
+        int leftArr[] = new int[mid - left +1];
+        int rightArr[] = new int[right - mid];
         
-        while(i<=mid && j<=end){
-            if(arr[i] <= arr[j]){
-                temp.add(arr[i]);
-                i++;
+        for(int i=0; i<leftArr.length; i++){
+            leftArr[i] = arr[left + i];
+        }
+        for(int i=0; i<rightArr.length; i++){
+            rightArr[i] = arr[mid+1 + i];
+        }
+        
+        int i=0, j=0, k=left, invCount = 0;
+        
+        while(i<leftArr.length && j<rightArr.length){
+            if(leftArr[i] <= rightArr[j]){
+                arr[k++] = leftArr[i++];
             }else{
-                invCount += mid-i+1;
-                temp.add(arr[j]);
-                j++;
+                arr[k++] = rightArr[j++];
+                invCount += (leftArr.length - i);
             }
         }
         
-        while(i <= mid){
-            temp.add(arr[i]);
-            i++;
+        while(i < leftArr.length){
+            arr[k++] = leftArr[i++];
         }
-        while(j <= end){
-            temp.add(arr[j]);
-            j++;
-        }
-        
-        for(int k=st; k<=end; k++){
-            arr[k] = temp.get(k-st);
+        while(j < rightArr.length){
+            arr[k++] = rightArr[j++];
         }
         
         return invCount;
     }
-    static int mergeSort(int arr[], int st, int end){
-        if(st < end){
-            int mid = st + (end - st)/2;
-            
-            int leftInvCount = mergeSort(arr, st, mid);
-            int rightInvCount = mergeSort(arr, mid+1, end);
-            
-            int invCount = merge(arr, st, mid, end);
-            
-            return leftInvCount + rightInvCount + invCount;
-            
+    static int mergeSort(int arr[], int left, int right){
+        int count = 0;
+        if(left < right){
+            int mid = left + (right - left)/2;
+            count += mergeSort(arr, left, mid);
+            count += mergeSort(arr, mid+1, right);
+            count += merge(arr, left, mid, right);
         }
-        
-        return 0;
+        return count;
     }
     // Function to count inversions in the array.
     static int inversionCount(int arr[]) {
         // Your Code Here
-        int st = 0;
-        int end = arr.length-1;
-        
-        return mergeSort(arr, st, end);
+        return mergeSort(arr, 0, arr.length-1);
     }
 }
