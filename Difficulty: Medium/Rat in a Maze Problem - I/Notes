@@ -1,0 +1,61 @@
+🔍 What is this code doing?
+This is solving the Rat in a Maze problem using Backtracking.
+You can move in four directions: Up (U), Right (R), Down (D), Left (L).
+You start at (0,0) and must reach (n-1, n-1) only through cells that are 1.
+
+✅ What does this part do?
+int originalValue = mat[row][col];
+mat[row][col] = 2;
+This is the marking step — it marks the current cell as visited.
+Since we can't go back to a visited cell in the same path, we temporarily set the cell to 2.
+
+This prevents cycles like:
+
+(0,0) → (0,1) → (0,0) → infinite loop.
+
+🔁 What happens after exploring all paths?
+mat[row][col] = originalValue;
+This is the restoring step (backtracking).
+After exploring all possible paths from this cell, we reset it back to its original value (1) so that it can be used in other paths.
+
+So it works like this:
+
+🧠 Dry Run Example:
+Let’s say:
+maze = 
+1 0
+1 1
+And you're at (0,0) and want to go to (1,1)
+Start at (0,0):
+originalValue = 1
+mat[0][0] = 2 ← Mark as visited
+
+Try moving:
+Up → Invalid
+Right → (0,1) is 0 → Wall
+Down → (1,0) is 1 → Valid → Recurse
+Left → Invalid
+
+In (1,0):
+originalValue = 1
+mat[1][0] = 2 ← Mark as visited
+
+Try moving:
+Down → (2,0) invalid
+
+Right → (1,1) is 1 → Goal Reached! Add path to result
+
+Then backtrack:
+mat[1][0] = 1 ← Restored
+Then
+mat[0][0] = 1 ← Restored
+
+🔁 Summary of These Lines:
+int originalValue = mat[row][col];   // Save current cell's value (usually 1)
+mat[row][col] = 2;                   // Mark as visited
+
+// Explore all directions
+solve(...);
+
+// Done exploring, restore it for future paths
+mat[row][col] = originalValue;
