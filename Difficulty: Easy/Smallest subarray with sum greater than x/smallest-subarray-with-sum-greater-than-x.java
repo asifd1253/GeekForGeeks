@@ -34,29 +34,20 @@ class Solution {
 
     public static int smallestSubWithSum(int x, int[] arr) {
         // Your code goes here
-        int n = arr.length;
-        int windowStart = 0;
-        int windowEnd = 0;
-        int sum = 0;
+        int start = 0;
+        int curSum = 0;
         int minLen = Integer.MAX_VALUE;
         
-        while(windowEnd < n){
-            //expansion
-            sum += arr[windowEnd];
-            if(sum > x){
-                minLen = Math.min(minLen, windowEnd-windowStart+1);
-                //shrinking
-                while(windowStart < windowEnd && sum > x){
-                    sum -= arr[windowStart];
-                    windowStart++;
-                    if(sum > x){
-                        minLen = Math.min(minLen, windowEnd-windowStart+1);
-                    }
-                }
+        for(int end=0; end<arr.length; end++){
+            curSum = curSum + arr[end];
+            
+            while(curSum > x){
+                minLen = Math.min(minLen, end - start +1);
+                curSum = curSum - arr[start];
+                start++;
             }
-            windowEnd++;
         }
         
-        return (minLen == Integer.MAX_VALUE)?0:minLen;
+        return (minLen == Integer.MAX_VALUE) ? 0 : minLen;
     }
 }
