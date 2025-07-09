@@ -41,7 +41,7 @@ class Solution {
         for(int end=0; end<arr.length; end++){
             curSum = curSum + arr[end];
             
-            while(curSum > x){
+            while(curSum > x){     //This will run when curSum > x(target) --> true
                 minLen = Math.min(minLen, end - start +1);
                 curSum = curSum - arr[start];
                 start++;
