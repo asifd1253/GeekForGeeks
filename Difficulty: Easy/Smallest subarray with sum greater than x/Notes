@@ -1,0 +1,22 @@
+🔢 Input:
+x = 51(target)
+arr = [1, 4, 45, 6, 0, 19]
+
+🧠 Variables:
+start: starting index of window
+end: ending index of window
+curSum: current window sum
+minLen: current minimum length of valid subarray
+
+📊 Dry Run Table:
+end :	arr[end] : curSum (after adding arr[end])	: start	: Shrinking?	: curSum (after shrinking)	: minLen (after shrinking)
+0	    1	                1	                          0	      ❌ No	                1	∞
+1	    4	                5	                          0	      ❌ No	                5	∞
+2	    45	              50	                        0	      ❌ No	                50	∞
+3	    6	                56	                        0	      ✅ Yes	    55 (start=1) → 51 (start=2)	      ✅ 4 → 3
+4	    0	                51	                        2	      ❌ No	                51	                        3
+5	    19	              70	                        2	      ✅ Yes	              25 (start=3)	              3
+
+✅ Final Output:
+minLen = 3
+(From subarray [4, 45, 6] → index 1 to 3)
