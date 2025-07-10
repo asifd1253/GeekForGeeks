@@ -35,34 +35,40 @@ class Solution {
     int minSwap(int[] arr, int k) {
         // Complete the function
         int n = arr.length;
-        int fav = 0;
-        int nonFav = 0;
         
-        for(int i=0; i<n; i++){
+        int windowSize = 0;
+        for(int i=0; i<arr.length; i++){
             if(arr[i] <= k){
-                fav++;
+                windowSize++;
             }
         }
         
-        for(int j=0; j<fav; j++){
-            if(arr[j] > k){
-                nonFav++;
+        int badcount = 0;
+        for(int i=0; i<windowSize; i++){
+            if(arr[i] > k){
+                badcount++;
             }
         }
         
-        int l=0, r=fav-1, result = Integer.MAX_VALUE;
+        int start = 0;
+        int end = windowSize;
+        int minswap = badcount;
         
-        while(r < n){
-            result = Math.min(result, nonFav);
-            r++;
-            if(r < n && arr[r] > k) {
-                nonFav++;
+        while(end < n){
+            if(arr[end] > k){
+                badcount++;
             }
-            if(l < n && arr[l] > k) {
-                nonFav--;
+            
+            if(arr[start] > k){
+                badcount--;
             }
+            
+            minswap = Math.min(minswap, badcount);
+            
+            start++;
+            end++;
         }
         
-        return (result == Integer.MAX_VALUE)?0:result;
+        return minswap;
     }
 }
