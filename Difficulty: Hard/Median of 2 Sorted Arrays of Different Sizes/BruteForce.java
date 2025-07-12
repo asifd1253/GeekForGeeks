@@ -1,35 +1,36 @@
 class Solution {
     public double medianOf2(int a[], int b[]) {
         // Your Code Here
-        int m = a.length;
-        int n = b.length;
+        ArrayList<Integer> arr = new ArrayList<>();
         
-        int temp[] = new int[m+n];
+        int left = 0;
+        int right = 0;
         
-        int i=0, j=0, k=0;
-        while(i < m && j < n){
-            if(a[i] < b[j]){
-                temp[k++] = a[i++];
+        while(left < a.length && right < b.length){
+            if(a[left] <= b[right]){
+                arr.add(a[left]);
+                left++;
             }else{
-                temp[k++] = b[j++];
+                arr.add(b[right]);
+                right++;
             }
         }
         
-        while(i < m){
-            temp[k++] = a[i++];
+        while(left < a.length){
+            arr.add(a[left]);
+            left++;
         }
         
-        while(j < n){
-            temp[k++] = b[j++];
+        while(right < b.length){
+            arr.add(b[right]);
+            right++;
         }
         
-        int size = m+n;
-        
-        if(size%2 != 0){
-            return temp[size/2];
+        int n = arr.size();
+        if(n % 2 != 0){
+            return arr.get(n/2);
+        }else{
+            return (arr.get(n/2)+arr.get(n/2-1))/2.0;
         }
-        
-        return (temp[size/2] + temp[(size/2)-1])/2.0;
-        
     }
 }
