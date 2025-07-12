@@ -1,107 +1,38 @@
-//{ Driver Code Starts
-// Initial Template for Java
-
-import java.io.*;
-import java.lang.*;
-import java.util.*;
-
-class Driver {
-    public static void main(String args[]) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int t = Integer.parseInt(br.readLine());
-        while (t-- > 0) {
-            String arr1[] = br.readLine().split(" ");
-            int[] a = new int[arr1.length];
-
-            for (int i = 0; i < a.length; i++) a[i] = Integer.parseInt(arr1[i]);
-
-            String arr2[] = br.readLine().split(" ");
-            int[] b = new int[arr2.length];
-
-            for (int i = 0; i < arr2.length; i++) b[i] = Integer.parseInt(arr2[i]);
-
-            if (b.length == 1 && b[0] == 0) {
-                b = new int[0];
-            }
-            double res = new Solution().medianOf2(a, b);
-
-            if (res == (int)res)
-                System.out.println((int)res);
-            else
-                System.out.println(res);
-            System.out.println("~");
-        }
-    }
-}
-// } Driver Code Ends
-
-
 // User function Template for Java
 
 class Solution {
     public double medianOf2(int a[], int b[]) {
         // Your Code Here
-        int m = a.length;
-        int n = b.length;
-        int size = m+n;
+        ArrayList<Integer> arr = new ArrayList<>();
         
-        int idx1 = (size/2)-1;
-        int idx2 = size/2;
+        int left = 0;
+        int right = 0;
         
-        int i=0, j=0, k=0;
-        
-        int ele1 = -1;
-        int ele2 = -1;
-        
-        while(i < m && j < n){
-            if(a[i] < b[j]){
-                if(k == idx1){
-                    ele1 = a[i];
-                }
-                if(k == idx2){
-                    ele2 = a[i];
-                }
-                i++;
-                k++;
+        while(left < a.length && right < b.length){
+            if(a[left] <= b[right]){
+                arr.add(a[left]);
+                left++;
             }else{
-                if(k == idx1){
-                    ele1 = b[j];
-                }
-                if(k == idx2){
-                    ele2 = b[j];
-                }
-                j++;
-                k++;
+                arr.add(b[right]);
+                right++;
             }
         }
         
-        while(i < m){
-            if(k == idx1){
-                ele1 = a[i];
-            }
-            if(k == idx2){
-                ele2 = a[i];
-            }
-            i++;
-            k++;
+        while(left < a.length){
+            arr.add(a[left]);
+            left++;
         }
         
-        while(j < n){
-            if(k == idx1){
-                ele1 = b[j];
-            }
-            if(k == idx2){
-                ele2 = b[j];
-            }
-            j++;
-            k++;
+        while(right < b.length){
+            arr.add(b[right]);
+            right++;
         }
         
-        if(size%2 != 0){
-            return ele2;
+        int n = arr.size();
+        if(n % 2 != 0){
+            return arr.get(n/2);
+        }else{
+            return (arr.get(n/2)+arr.get(n/2-1))/2.0;
         }
-        
-        return (ele1+ele2)/2.0;
-        
     }
 }
