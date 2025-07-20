@@ -23,9 +23,16 @@ class Solution {
                 int size = Math.min(row[r][c], col[r][c]);
                 
                 while(size > result){
-                    if((r - size+1) >= 0 && (c - size+1) >= 0 && 
-                    row[r][c] >= size && col[r][c] >= size &&
-                    row[r - size+1][c] >= size && col[r][c - size+1] >= size){
+                    if (
+                        (r - size + 1) >= 0 &&             // 1️⃣ Top row of the square must be within bounds
+                        (c - size + 1) >= 0 &&             // 2️⃣ Left column of the square must be within bounds
+                        
+                        row[r][c] >= size &&               // 3️⃣ Bottom border: From (r, c - size + 1) to (r, c) has all 'X'
+                        col[r][c] >= size &&               // 4️⃣ Right border: From (r - size + 1, c) to (r, c) has all 'X'
+                        
+                        row[r - size + 1][c] >= size &&    // 5️⃣ Top border: From (r - size + 1, c - size + 1) to (r - size + 1, c) has all 'X'
+                        col[r][c - size + 1] >= size       // 6️⃣ Left border: From (r - size + 1, c - size + 1) to (r, c - size + 1) has all 'X'
+                    )
                         result = size;
                         break;
                     }else{
