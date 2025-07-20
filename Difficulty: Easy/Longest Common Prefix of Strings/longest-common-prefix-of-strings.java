@@ -1,50 +1,28 @@
-//{ Driver Code Starts
-// Initial Template for Java
-
-import java.io.*;
-import java.util.*;
-
-class GFG {
-    public static void main(String args[]) throws IOException {
-        BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
-        int t = Integer.parseInt(read.readLine());
-        while (t-- > 0) {
-            String arr[] = read.readLine().trim().split(" ");
-
-            Solution ob = new Solution();
-            String ans = ob.longestCommonPrefix(arr);
-
-            if (ans.isEmpty()) {
-                System.out.print("\"\"");
-            } else {
-                System.out.print(ans);
-            }
-            System.out.println();
-        }
-    }
-}
-// } Driver Code Ends
-
-
 // User function Template for Java
 class Solution {
     public String longestCommonPrefix(String arr[]) {
         // code here
-        if(arr == null || arr.length == 0){
+        if(arr.length == 0 || arr == null){
             return "";
         }
         
-        String prefix = arr[0];
+        String prefixString = arr[0];
         
         for(int i=1; i<arr.length; i++){
-            while(!arr[i].startsWith(prefix)){
-                prefix = prefix.substring(0,prefix.length()-1);
-                if(prefix.length() == 0){
+            String currString = arr[i];
+            
+            while(!currString.startsWith(prefixString)){
+                
+                // let original prefixString characters = 6
+                // Here is the main logic .substring(0, n) ---> (0, 6) = 5 charecters
+                prefixString = prefixString.substring(0, prefixString.length() - 1);
+                
+                if(prefixString.length() == 0){
                     return "";
                 }
             }
         }
         
-        return prefix;
+        return prefixString;
     }
 }
