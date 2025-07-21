@@ -18,18 +18,10 @@ System.out.println("~");
 // } Driver Code Ends
 
 
-//User function Template for Java
-class Solution 
-{ 
-    String to_upper(String str) 
-    { 
+// User function Template for Java
+class Solution {
+    String to_upper(String str) {
         // code here
-        StringBuilder newStr = new StringBuilder();
-        
-        for(int i=0; i<str.length(); i++){
-            newStr.append(Character.toUpperCase(str.charAt(i)));
-        }
-        
-        return newStr.toString();
+        return str.toUpperCase();
     }
-} 
+}
