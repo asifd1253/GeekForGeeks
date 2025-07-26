@@ -1,29 +1,6 @@
-//{ Driver Code Starts
-// Initial Template for Java
-
-import java.io.*;
-import java.util.*;
-
-class GFG {
-    public static void main(String args[]) throws IOException {
-        BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
-        int t = Integer.parseInt(read.readLine());
-        while (t-- > 0) {
-            String S = read.readLine();
-
-            Solution ob = new Solution();
-            System.out.println(ob.longestPalindrome(S));
-            System.out.println("~");
-        }
-    }
-}
-
-// } Driver Code Ends
-
-
 
 class Solution {
-    
+    //Recursion based two pointer to solve
     static boolean solve(String s, int i, int j){
         if(i >= j){
             return true;
@@ -35,6 +12,7 @@ class Solution {
         
         return false;
     }
+    
     static String longestPalindrome(String s) {
         // code here
         int n = s.length();
@@ -42,7 +20,7 @@ class Solution {
         int sp = -1;
         
         for(int i=0; i<n; i++){
-            for(int j=i; j<n; j++){
+            for(int j=i ;j<n; j++){
                 if(solve(s, i, j) == true){
                     if(j-i+1 > maxLen){
                         maxLen = j-i+1;
