@@ -15,14 +15,15 @@ class Node {
 class Solution {
     Node reverseList(Node head) {
         // code here
-        Node curr = head;
         Node prev = null;
+        Node curr = head;
+        Node next;
         
         while(curr != null){
-            Node newNode = curr.next;
+            next = curr.next;
             curr.next = prev;
             prev = curr;
-            curr = newNode;
+            curr = next;
         }
         
         return prev;
