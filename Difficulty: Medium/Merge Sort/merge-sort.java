@@ -1,5 +1,6 @@
 class Solution {
-    void merge(int arr[], int l, int mid, int r){
+                    //    leftStart, rightStart(mid+1)
+    void merge(int arr[], int l,     int mid,    int r){
         int i = l;
         int j = mid+1;
         int k = 0;
