@@ -11,22 +11,42 @@ class Solution {
         
         // return str.toString();
         
+        //***************************************************************
+        
+        // int left = 0;
+        // int right = s.length()-1;
+        
+        // StringBuilder sb = new StringBuilder(s);
+        
+        // while(left < right){
+        //     char leftChar = s.charAt(left);
+        //     char rightChar = s.charAt(right);
+            
+        //     sb.setCharAt(left, rightChar);
+        //     sb.setCharAt(right, leftChar);
+            
+        //     left++;
+        //     right--;
+        // }
+        
+        // return sb.toString();
+
+        //***************************************************************
+        
+        char arr[] = s.toCharArray();
+        
         int left = 0;
         int right = s.length()-1;
         
-        StringBuilder sb = new StringBuilder(s);
-        
         while(left < right){
-            char leftChar = s.charAt(left);
-            char rightChar = s.charAt(right);
-            
-            sb.setCharAt(left, rightChar);
-            sb.setCharAt(right, leftChar);
+            char temp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = temp;
             
             left++;
             right--;
         }
         
-        return sb.toString();
+        return new String(arr);
     }
 }
