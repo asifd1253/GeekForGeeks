@@ -1,38 +1,37 @@
-// User function Template for Java
-
 class Solution {
     public double medianOf2(int a[], int b[]) {
-        // Your Code Here
-        ArrayList<Integer> arr = new ArrayList<>();
+        // Code Here
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
         
-        int left = 0;
-        int right = 0;
-        
-        while(left < a.length && right < b.length){
-            if(a[left] <= b[right]){
-                arr.add(a[left]);
-                left++;
-            }else{
-                arr.add(b[right]);
-                right++;
-            }
+        for(int i : a){
+            pq.add(i);
         }
         
-        while(left < a.length){
-            arr.add(a[left]);
-            left++;
+        for(int i : b){
+            pq.add(i);
         }
         
-        while(right < b.length){
-            arr.add(b[right]);
-            right++;
+        int arr[] = new int[pq.size()];
+        
+        int idx = 0;
+        while(!pq.isEmpty()){
+            arr[idx++] = pq.peek();
+            pq.remove();
         }
         
-        int n = arr.size();
-        if(n % 2 != 0){
-            return arr.get(n/2);
+        int start = 0;
+        int end = arr.length-1;
+        
+        int mid = start + (end - start)/2;
+        
+        double res = 0.0;
+        
+        if(arr.length % 2 == 0){
+            res = (arr[mid] + arr[mid+1])/2.0;
         }else{
-            return (arr.get(n/2)+arr.get(n/2-1))/2.0;
+            res = (double)arr[mid];
         }
+        
+        return res;
     }
 }
