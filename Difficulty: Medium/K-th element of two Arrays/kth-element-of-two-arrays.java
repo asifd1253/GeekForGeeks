@@ -1,22 +1,27 @@
-// User function Template for Java
-
 class Solution {
     public int kthElement(int a[], int b[], int k) {
         // code here
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        ArrayList<Integer> arr = new ArrayList<>();
         
-        for(int i : a){
-            pq.add(i);
+        int i=0; 
+        int j=0;
+        
+        while(i<a.length && j<b.length){
+            if(a[i] <= b[j]){
+                arr.add(a[i++]);
+            }else{
+                arr.add(b[j++]);
+            }
         }
         
-        for(int i : b){
-            pq.add(i);
+        while(i<a.length){
+            arr.add(a[i++]);
         }
         
-        for(int i=1; i<k; i++){
-            pq.remove();
+        while(j<b.length){
+            arr.add(b[j++]);
         }
         
-        return pq.peek();
+        return arr.get(k-1);
     }
 }
