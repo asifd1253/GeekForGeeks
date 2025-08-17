@@ -1,19 +1,27 @@
-
-
 class Solution {
-    // Function to search a given number in row-column sorted matrix.
-    public boolean searchMatrix(int[][] mat, int x) {
+    public boolean searchMatrix(int[][] mat, int target) {
         // code here
-        int row = 0;
-        int col = mat[0].length-1;
+        if(mat.length == 0){
+            return false;
+        }
         
-        while(row <= mat.length-1 && col >= 0){
-            if(mat[row][col] == x){
+        int m = mat.length;   // rows
+        int n = mat[0].length; // cols
+        
+        int start = 0;
+        int end = m*n-1;
+        
+        while(start <= end){
+            int mid = start + (end - start)/2;
+            int r = mid / n;
+            int c = mid % n;
+            int val = mat[r][c];
+            if(val == target){
                 return true;
-            }else if(x > mat[row][col]){
-                row++;
+            }else if(target < val){
+                end = mid - 1;
             }else{
-                col--;
+                start = mid + 1;
             }
         }
         
