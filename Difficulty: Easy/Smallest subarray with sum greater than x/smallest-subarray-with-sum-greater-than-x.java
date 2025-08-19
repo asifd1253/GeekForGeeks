@@ -1,53 +1,47 @@
-//{ Driver Code Starts
-// Initial Template for Java
-
-import java.io.*;
-import java.lang.*;
-import java.util.*;
-
-public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int T = Integer.parseInt(br.readLine().trim());
-
-        while (T > 0) {
-            int x = Integer.parseInt(br.readLine().trim());
-            String[] input = br.readLine().trim().split(" ");
-            int[] arr = Arrays.stream(input).mapToInt(Integer::parseInt).toArray();
-
-            Solution solution = new Solution();
-            System.out.println(solution.smallestSubWithSum(x, arr));
-
-            T--;
-
-            System.out.println("~");
-        }
-    }
-}
-
-// } Driver Code Ends
-
 
 // User function Template for Java
 
 class Solution {
 
-    public static int smallestSubWithSum(int x, int[] arr) {
+    public static int smallestSubWithSum(int k, int[] arr) {
         // Your code goes here
-        int start = 0;
-        int curSum = 0;
+        int n = arr.length;
+        int winStart = 0;
+        // int winEnd = 0;
         int minLen = Integer.MAX_VALUE;
+        int curLen = 0;
+        int curSum = 0;
         
-        for(int end=0; end<arr.length; end++){
-            curSum = curSum + arr[end];
+        // while(winEnd < n){
+        //     curSum += arr[winEnd];
+        //     if(curSum > k){
+        //         curLen = winEnd-winStart+1;
+        //         minLen = Math.min(minLen, curLen);
+                
+        //         while(winStart <= winEnd && curSum > k){
+        //             curSum -= arr[winStart];
+        //             if(curSum > k){
+        //                 curLen = winEnd-winStart+1;
+        //                 minLen = Math.min(minLen, curLen);
+        //             }
+        //             winStart++;
+        //         }
+        //     }
             
-            while(curSum > x){     //This will run when curSum > x(target) --> true
-                minLen = Math.min(minLen, end - start +1);
-                curSum = curSum - arr[start];
-                start++;
+        //     winEnd++;
+        // }
+        
+        for(int winEnd = 0; winEnd < n; winEnd++){
+            curSum += arr[winEnd];
+            
+            while(winStart <= winEnd && curSum > k){
+                curSum -= arr[winStart];
+                curLen = winEnd - winStart + 1;
+                minLen = Math.min(minLen, curLen);
+                winStart++;
             }
         }
         
-        return (minLen == Integer.MAX_VALUE) ? 0 : minLen;
+        return (minLen == Integer.MAX_VALUE)?0:minLen;
     }
 }
