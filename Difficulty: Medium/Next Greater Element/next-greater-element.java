@@ -32,36 +32,3 @@ class Solution {
         return res;
     }
 }
-
-
-// class Solution {
-//     public ArrayList<Integer> nextLargerElement(int[] arr) {
-//         int n = arr.length;
-//         int[] result = new int[n];
-//         Stack<Integer> st = new Stack<>();
-        
-//         for (int i = n - 1; i >= 0; i--) {
-//             // Remove elements from stack that are smaller than current
-//             while (!st.isEmpty() && st.peek() <= arr[i]) {
-//                 st.pop();
-//             }
-            
-//             // If stack is empty, no greater element exists
-//             if (st.isEmpty()) {
-//                 result[i] = -1;
-//             } else {
-//                 result[i] = st.peek();
-//             }
-            
-//             // Push current element to stack
-//             st.push(arr[i]);
-//         }
-        
-//         // Convert array to ArrayList
-//         ArrayList<Integer> res = new ArrayList<>();
-//         for (int num : result) {
-//             res.add(num);
-//         }
-//         return res;
-//     }
-// }
