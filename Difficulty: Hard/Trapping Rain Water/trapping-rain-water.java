@@ -2,29 +2,26 @@ class Solution {
     public int maxWater(int arr[]) {
         // code here
         int n = arr.length;
-        
         int leftMax[] = new int[n];
-        leftMax[0] = arr[0];
-        
         int rightMax[] = new int[n];
-        rightMax[n-1] = arr[n-1];
         
-        for(int i=1; i<n; i++){
+        leftMax[0] = arr[0];
+        for(int i=1; i<arr.length; i++){
             leftMax[i] = Math.max(leftMax[i-1], arr[i]);
         }
-            
-        for(int j=n-2; j>=0; j--){
-            rightMax[j] = Math.max(arr[j], rightMax[j+1]);
+        
+        rightMax[n-1] = arr[n-1];
+        for(int i=n-2; i>=0; i--){
+            rightMax[i] = Math.max(rightMax[i+1], arr[i]);
         }
         
         int trappedWater = 0;
-        
-        for(int k=0; k<n; k++){
-            int waterLevel = Math.min(leftMax[k], rightMax[k]);
+        for(int i=0; i<arr.length; i++){
             
-            trappedWater = trappedWater + (waterLevel-arr[k])*1;
+            int waterLevel = Math.min(leftMax[i], rightMax[i]);
+            
+            trappedWater += waterLevel - arr[i] * 1;
         }
-        
         
         return trappedWater;
     }
