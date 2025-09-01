@@ -19,9 +19,9 @@ class MyQueue {
         if(size == capacity){
             return;
         }
-        arr[rear] = x;
+        arr[rear++] = x;
         
-        rear = (rear+1)%capacity;
+        // rear = (rear+1)%capacity;
         size++;
     }
 
@@ -34,7 +34,8 @@ class MyQueue {
         }
         int val = arr[front];
         
-        front = (front + 1)%capacity;
+        // front = (front + 1)%capacity;
+        front++;
         size--;
         return val;
     }
