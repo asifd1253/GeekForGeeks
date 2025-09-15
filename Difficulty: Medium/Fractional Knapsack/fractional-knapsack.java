@@ -1,31 +1,29 @@
-// User function Template for Java
 class Solution {
-    // Function to get the maximum total value in the knapsack.
-    double fractionalKnapsack(List<Integer> val, List<Integer> wt, int capacity) {
+    public double fractionalKnapsack(int[] val, int[] wt, int capacity) {
         // code here
-        ArrayList<double[]> ratio = new ArrayList<>();
+        int n = val.length;
         
-        for(int i=0; i<val.size(); i++){
-            double rat = (double)val.get(i)/wt.get(i);
-            ratio.add(new double[]{i,rat});
+        double ratio[][] = new double[n][2];
+        
+        for(int i=0; i<n; i++){
+            ratio[i][0] = i;
+            ratio[i][1] = (double)val[i]/wt[i];
         }
         
-        ratio.sort((a,b)-> Double.compare(b[1], a[1]));
+        Arrays.sort(ratio, Comparator.comparingDouble(o -> o[1]));
+        double maxVal = 0;
         
-        double result = 0;
-        for(double[] item : ratio){
-            int index = (int)item[0];
-            
-            if(capacity >= wt.get(index)){
-                capacity -= wt.get(index);
-                result = result + val.get(index);
+        for(int i=n-1; i>=0; i--){
+            int idx = (int)ratio[i][0];
+            if(capacity >= wt[idx]){
+                maxVal += val[idx];
+                capacity -= wt[idx];
             }else{
-                // If only a fraction of the item can fit, take that fraction.
-                result = result + (item[1]*capacity);
+                maxVal += ratio[i][1]*capacity;
                 break;
             }
         }
         
-        return result;
+        return maxVal;
     }
 }
