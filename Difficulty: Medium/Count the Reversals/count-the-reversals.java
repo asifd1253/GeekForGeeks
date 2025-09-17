@@ -1,22 +1,13 @@
-//{ Driver Code Starts
-// Initial Template for Java
-import java.util.*;
-
-
-// } Driver Code Ends
-
 class Solution {
     public int countMinReversals(String s) {
         // code here
-        if(s.length()%2 != 0){
-            return -1;
-        }
+        if(s.length()%2 != 0) return -1;
         
         int left = 0;
         int right = 0;
         
-        for(int i=0; i<s.length(); i++){
-            if(s.charAt(i) == '{'){
+        for(char ch : s.toCharArray()){
+            if(ch == '{'){
                 left++;
             }else{
                 if(left > 0){
@@ -27,28 +18,9 @@ class Solution {
             }
         }
         
-        int leftReversal = (left+1)/2;
-        int rightReversal = (right+1)/2;
-       
-        return leftReversal + rightReversal;
+        int totalLeftReversals = (int)Math.ceil(left/2.0);
+        int totalRightReversals = (int)Math.ceil(right/2.0);
+        
+        return totalLeftReversals+totalRightReversals;
     }
 }
-
-
-//{ Driver Code Starts.
-public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Solution sol = new Solution();
-        int t = sc.nextInt();
-        sc.nextLine(); // Consume the newline character
-        while (t-- > 0) {
-            String s = sc.nextLine();
-            System.out.println(sol.countMinReversals(s));
-            System.out.println("~");
-        }
-        sc.close();
-    }
-}
-
-// } Driver Code Ends
