@@ -1,33 +1,10 @@
-//{ Driver Code Starts
-import java.util.*;
-
-class GFG {
-    public static void main(String args[]) {
-        Scanner sc = new Scanner(System.in);
-        int t = sc.nextInt();
-        sc.nextLine();
-        while (t > 0) {
-            String str = sc.nextLine();
-            // System.out.println(str.length());
-            Solution ob = new Solution();
-            System.out.println(ob.countPS(str));
-            t--;
-
-            System.out.println("~");
-        }
-    }
-}
-// } Driver Code Ends
-
-
-/*You are required to complete below method */
-
 class Solution {
     int dp[][];
  
     int countPS(String s) {
         // Your code here
         int n = s.length();
+        
         dp = new int[n][n];
         
         for(int gap=0; gap<n; gap++){
