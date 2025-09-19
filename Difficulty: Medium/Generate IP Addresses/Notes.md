@@ -35,3 +35,29 @@ Return the list of all valid combinations.
 
 
 YOU CAN UNDERSTAND THE CODE EASILY...
+
+
+===> for condition in loops this is the reason
+for(int i=1; i<=3 && i<n-2; i++){
+            for(int j=i+1; j<=i+3 && j<n-1; j++){
+                for(int k=j+1; k<=j+3 && k<n; k++){
+
+Test Cases Passed: 
+2 /404
+For Input : 
+11211
+Your Output:
+Hangup (SIGHUP)
+Exception in thread "main" java.lang.StringIndexOutOfBoundsException: Index 0 out of bounds for length 0
+	at java.base/jdk.internal.util.Preconditions$1.apply(Preconditions.java: 53)
+	at java.base/jdk.internal.util.Preconditions$1.apply(Preconditions.java: 50)
+	at java.base/jdk.internal.util.Preconditions$4.apply(Preconditions.java: 211)
+	at java.base/jdk.internal.util.Preconditions$4.apply(Preconditions.java: 208)
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditio...
+
+Its Correct output is:
+1.1.2.11
+1.1.21.1
+1.12.1.1
+11.2.1.1
+
