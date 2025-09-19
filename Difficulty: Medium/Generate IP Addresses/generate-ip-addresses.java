@@ -1,18 +1,13 @@
 /*complete the Function*/
 
 class Solution {
-    boolean isValid(String s){
-        if(s.length() == 0 || s.length() > 3){
-            return false;
-        }
-
-        if(s.charAt(0) == '0' && s.length() > 1){
-            return false;
-        }
+    boolean isValid(String str){
+        if(str.length() > 3) return false;
+        if(str.charAt(0) == '0' && str.length() > 1) return false;
         
-        int num = Integer.parseInt(s);
+        int num = Integer.parseInt(str);
         
-        return num >= 0 && num <= 255;
+        return num>=0 && num<=255;
     }
     
     public ArrayList<String> generateIp(String s) {
@@ -37,5 +32,6 @@ class Solution {
         }
         
         return res;
+        
     }
 }
