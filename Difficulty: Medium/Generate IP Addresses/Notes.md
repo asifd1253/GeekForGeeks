@@ -61,3 +61,6 @@ Its Correct output is:
 1.12.1.1
 11.2.1.1
 
+<img width="1280" height="3129" alt="image for test cases pass" src="https://github.com/user-attachments/assets/040148f8-f5df-4a2e-ab81-e7a5a11c7352" />
+
+
