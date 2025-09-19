@@ -3,38 +3,41 @@
 class Solution {
     int transform(String A, String B) {
         // code here
-        int n = A.length();
-        int m = B.length();
+        int p1=A.length()-1;
+        int p2=B.length()-1;
         
-        if(n != m){
+        if(p1 != p2){
             return -1;
         }
         
-        int freq[] = new int[256];
+        int charFreq[] = new int[256];
         
-        for(int i=0; i<n; i++){
-            freq[A.charAt(i)]++;
-            freq[B.charAt(i)]--;
+        for(int i=0; i<A.length(); i++){
+            charFreq[A.charAt(i)]++;
+            charFreq[B.charAt(i)]--;
         }
         
-        for(int count : freq){
+        for(int count : charFreq){
             if(count != 0){
                 return -1;
             }
         }
         
-        int p1 = n-1;
-        int p2 = m-1;
-        int steps = 0;
+        int operations = 0;
         
         while(p1 >= 0){
-            if(A.charAt(p1) == B.charAt(p2)){
-                p2--;
+            char c1 = A.charAt(p1);
+            char c2 = B.charAt(p2);
+            
+            if(c1 == c2){
+               p2--;
             }else{
-                steps++;
+                operations++;
             }
+            
             p1--;
         }
-        return steps;
+        
+        return operations;
     }
 }
