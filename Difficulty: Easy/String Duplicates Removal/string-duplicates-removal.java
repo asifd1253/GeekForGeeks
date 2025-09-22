@@ -2,18 +2,18 @@
 
 class Solution {
     String removeDuplicates(String s) {
-        Set<Character> set = new LinkedHashSet<>();
+        LinkedHashSet<Character> lhs = new LinkedHashSet<>();
         
-        for(int i=0; i<s.length(); i++){
-            char ch = s.charAt(i);
-            set.add(ch);
+        for(char ch : s.toCharArray()){
+            lhs.add(ch);
         }
         
-        StringBuilder str = new StringBuilder();
-        for(char ch : set){
-            str.append(ch);
+        StringBuilder sb = new StringBuilder();
+        
+        for(char ch : lhs){
+            sb.append(ch);
         }
         
-        return str.toString();
+        return sb.toString();
     }
 }
