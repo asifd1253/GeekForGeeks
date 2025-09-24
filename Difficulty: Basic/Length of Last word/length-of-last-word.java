@@ -2,13 +2,28 @@
 class Solution {
     int findLength(String s) {
         // code here
-        String arr[] = s.split(" ");
+        StringBuilder sb = new StringBuilder();
         
-        int count = 0;
-        for(int i=arr[arr.length-1].length()-1; i>=0; i--){
-            count++;
+        int startIdx = s.length()-1;
+        while(startIdx >= 0){
+            while(startIdx >= 0 && s.charAt(startIdx) == ' '){
+                startIdx--;
+            }
+            
+            if(startIdx < 0){
+                break;
+            }
+            
+            int endIdx = startIdx;
+            
+            while(startIdx >= 0 && s.charAt(startIdx) != ' '){
+                startIdx--;
+            }
+            
+            sb.append(s.substring(startIdx+1, endIdx+1));
+            break;
         }
         
-        return count;
+        return sb.length();
     }
 }
