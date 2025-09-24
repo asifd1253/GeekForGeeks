@@ -1,33 +1,30 @@
 class Solution {
     public String reverseWords(String s) {
         // Code here
-        StringBuilder res = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         
-        int stIdx = s.length()-1;
+        int startIdx = s.length()-1;
         
-        while(stIdx >= 0){
-            while(stIdx >= 0 && s.charAt(stIdx) == '.'){
-                stIdx--;
+        while(startIdx >= 0){
+            while(startIdx >= 0 && s.charAt(startIdx) == '.'){
+                startIdx--;
             }
             
-            if(stIdx < 0){
-                break;    
+            if(startIdx < 0) break;
+            
+            int endIdx = startIdx;
+            
+            while(startIdx >= 0 && s.charAt(startIdx) != '.'){
+                startIdx--;
             }
             
-            int endIdx = stIdx;
-            
-            while(stIdx >= 0 && s.charAt(stIdx) != '.'){
-                stIdx--;
-            }
-            
-            if(res.length() == 0){
-                res.append(s.substring(stIdx+1, endIdx+1));
+            if(sb.length() == 0){
+                sb.append(s.substring(startIdx+1, endIdx+1));
             }else{
-                res.append('.').append(s.substring(stIdx+1, endIdx+1));
+                sb.append('.').append(s.substring(startIdx+1, endIdx+1));
             }
         }
         
-        return res.toString();
-        
+        return sb.toString();
     }
 }
