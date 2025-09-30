@@ -8,7 +8,6 @@ class Solution {
         }
         
         TreeMap<Integer, Integer> map = new TreeMap<>();
-        
         for(int i : hand){
             map.put(i, map.getOrDefault(i, 0)+1);
         }
@@ -17,14 +16,16 @@ class Solution {
             int firstCard = map.firstKey();
             
             for(int i=0; i<groupSize; i++){
-                //currentCard + i
-                int currentCard = firstCard + i;
-                if(!map.containsKey(currentCard)){
+                int nextCard = firstCard + i;
+                
+                if(!map.containsKey(nextCard)){
                     return false;
                 }
-                map.put(currentCard, map.get(currentCard)-1);
-                if(map.get(currentCard) == 0){
-                    map.remove(currentCard);
+                
+                map.put(nextCard, map.get(nextCard)-1);
+                
+                if(map.get(nextCard) == 0){
+                    map.remove(nextCard);
                 }
             }
         }
