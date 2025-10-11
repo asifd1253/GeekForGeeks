@@ -1,44 +1,44 @@
 class Solution {
-                    //    leftStart, rightStart(mid+1)
-    void merge(int arr[], int l,     int mid,    int r){
-        int i = l;
+    void merge(int arr[], int si, int mid, int ei){
+        int i = si;
         int j = mid+1;
-        int k = 0;
         
-        int temp[] = new int[r-l+1];
-        while(i<=mid && j<=r){
+        int k = 0;      //temp iterator
+        int temp[] = new int[ei-si+1];
+        
+        while(i <= mid && j <= ei){
             if(arr[i] < arr[j]){
                 temp[k] = arr[i];
-                i++;
-                k++;
+                i++; k++;
             }else{
                 temp[k] = arr[j];
-                j++;
-                k++;
+                j++; k++;
             }
         }
         
-        while(i<=mid){
+        while(i <= mid){
             temp[k++] = arr[i++];
         }
         
-        while(j<=r){
+        while(j <= ei){
             temp[k++] = arr[j++];
         }
         
-        for(int x=0; x<temp.length; x++){
-            arr[l+x] = temp[x];
+        for(int m=0; m<temp.length; m++){
+            arr[si+m] = temp[m];
         }
     }
-    void mergeSort(int arr[], int l, int r) {
+
+    void mergeSort(int arr[], int si, int ei) {
         // code here
-        if(l >= r){
+        if(si >= ei){
             return;
         }
         
-        int mid = l + (r - l)/2;
-        mergeSort(arr, l, mid);
-        mergeSort(arr, mid+1, r);
-        merge(arr, l, mid, r);
+        int mid = si + (ei - si)/2;
+        mergeSort(arr, si, mid);
+        mergeSort(arr, mid+1, ei);
+        
+        merge(arr, si, mid, ei);
     }
 }
