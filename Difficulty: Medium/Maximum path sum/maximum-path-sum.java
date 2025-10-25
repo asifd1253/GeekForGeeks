@@ -15,7 +15,7 @@ class Solution {
     int dfs(Node root){
         if(root == null) return 0;
         
-        int leftMax = Math.max(dfs(root.left), 0);
+        int leftMax = Math.max(dfs(root.left), 0);   //Ignores negative paths that's why
         int rightMax= Math.max(dfs(root.right), 0);
         
         maxSum = Math.max(maxSum, root.data+leftMax+rightMax);
