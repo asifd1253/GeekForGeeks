@@ -3,22 +3,23 @@
 class Solution {
     long countTriplets(int n, int sum, long arr[]) {
         Arrays.sort(arr);
-        long count = 0;
+        
+        long res = 0;
         
         for(int i=0; i<arr.length; i++){
-            int left = i+1;
-            int right = arr.length-1;
+            int l = i+1;
+            int r = arr.length-1;
             
-            while(left < right){
-                if(arr[i] + arr[left] + arr[right] < sum){
-                    count = count + (right-left);
-                    left++;
+            while(l < r){
+                if(arr[i] + arr[l] + arr[r] < sum){
+                    res = res + (r - l);
+                    l++;
                 }else{
-                    right--;
+                    r--;
                 }
             }
         }
         
-        return count;
+        return res;
     }
 }
