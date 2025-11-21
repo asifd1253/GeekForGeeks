@@ -1,30 +1,65 @@
 class Solution {
     public int kthElement(int a[], int b[], int k) {
         // code here
-        ArrayList<Integer> arr = new ArrayList<>();
+        // ArrayList<Integer> arr = new ArrayList<>();
+        
+        // int i=0, j=0;
+        
+        // while(i<a.length && j<b.length){
+        //     if(a[i] <= b[j]){
+        //         arr.add(a[i]);
+        //         i++;
+        //     }else{
+        //         arr.add(b[j]);
+        //         j++;
+        //     }
+        // }
+        
+        // while(i<a.length){
+        //     arr.add(a[i]);
+        //     i++;
+        // }
+        
+        // while(j<b.length){
+        //     arr.add(b[j]);
+        //     j++;
+        // }
+        
+        // return arr.get(k-1);
+        
+        int res=-1;
+        int counter=0;
         
         int i=0, j=0;
         
         while(i<a.length && j<b.length){
             if(a[i] <= b[j]){
-                arr.add(a[i]);
+                res = a[i];
+                counter++;
+                if(counter == k) return res;
                 i++;
             }else{
-                arr.add(b[j]);
+                res = b[j];
+                counter++;
+                if(counter == k) return res;
                 j++;
             }
         }
         
         while(i<a.length){
-            arr.add(a[i]);
+            res = a[i];
+            counter++;
+            if(counter == k) return res;
             i++;
         }
         
         while(j<b.length){
-            arr.add(b[j]);
+            res = b[j];
+            counter++;
+            if(counter == k) return res;
             j++;
         }
         
-        return arr.get(k-1);
+        return -1;
     }
 }
