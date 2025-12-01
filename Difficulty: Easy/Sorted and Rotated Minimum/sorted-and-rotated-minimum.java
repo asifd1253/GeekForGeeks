@@ -3,20 +3,19 @@
 class Solution {
     public int findMin(int[] arr) {
         // complete the function here
-        
-        int start = 0;
+        int st = 0;
         int end = arr.length-1;
         int minEle = Integer.MAX_VALUE;
         
-        while(start <= end){
-            int mid = start + (end - start)/2;
+        while(st <= end){
+            int mid = st + (end - st)/2;
             
-            if(arr[start] <= arr[mid]){
-                minEle = Math.min(minEle, arr[start]);
-                start = mid + 1;
+            if(arr[st] <= arr[mid]){
+                minEle = Math.min(minEle, arr[st]);
+                st = mid + 1;
             }else{
                 minEle = Math.min(minEle, arr[mid]);
-                end = mid - 1;
+                end = mid-1;
             }
         }
         
