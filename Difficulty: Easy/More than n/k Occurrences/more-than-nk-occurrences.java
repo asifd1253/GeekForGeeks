@@ -8,15 +8,14 @@ class Solution {
             map.put(i, map.getOrDefault(i, 0)+1);
         }
         
+        int res = 0;
+        
         int times = arr.length/k;
-        int count = 0;
         
         for(int key : map.keySet()){
-            if(map.get(key) > times){
-                count++;
-            }
+            if(map.get(key) > times) res++;
         }
         
-        return count;
+        return res;
     }
 }
