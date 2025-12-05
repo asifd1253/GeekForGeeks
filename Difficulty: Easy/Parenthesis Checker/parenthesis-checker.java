@@ -3,19 +3,17 @@ class Solution {
         // code here
         Stack<Character> st = new Stack<>();
         
-        for(int i=0; i<s.length(); i++){
-            char curChar = s.charAt(i);
-            
-            if(curChar == '(' || curChar == '[' || curChar == '{'){
-                st.push(curChar);
+        for(char ch : s.toCharArray()){
+            if(ch == '(' || ch == '[' || ch == '{'){
+                st.push(ch);
             }else if(st.isEmpty()){
                 return false;
-            }else {
-                if(curChar == ')' && st.peek() == '('){
+            }else{
+                if(ch == ')' && st.peek() == '('){
                     st.pop();
-                }else if(curChar == '}' && st.peek() == '{'){
+                }else if(ch == ']' && st.peek() == '['){
                     st.pop();
-                }else if(curChar == ']' && st.peek() == '['){
+                }else if(ch == '}' && st.peek() == '{'){
                     st.pop();
                 }else{
                     return false;
@@ -23,6 +21,6 @@ class Solution {
             }
         }
         
-        return st.isEmpty()?true:false;
+        return st.isEmpty() ? true : false;
     }
 }
