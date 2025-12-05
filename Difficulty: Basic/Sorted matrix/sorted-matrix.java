@@ -5,20 +5,20 @@ class Solution {
         // code here
         PriorityQueue<Integer> pq = new PriorityQueue<>();
         
-        for(int i=0; i<Mat.length; i++){
-            for(int j=0; j<Mat[0].length; j++){
-                pq.add(Mat[i][j]);
+        for(int arr[] : Mat){
+            for(int i : arr){
+                pq.offer(i);
             }
         }
         
-        //Restore the elements
-        for(int i=0; i<Mat.length; i++){
-            for(int j=0; j<Mat[0].length; j++){
-                Mat[i][j] = pq.peek();
-                pq.remove();
+        int res[][] = new int[N][N];
+        
+        for(int i=0; i<N; i++){
+            for(int j=0; j<N; j++){
+                res[i][j] = pq.poll();
             }
         }
         
-        return Mat;
+        return res;
     }
 };
