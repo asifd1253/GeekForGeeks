@@ -7,15 +7,19 @@ class Solution {
             pq.offer(i);
         }
         
-        int totalCost = 0;
-        while(pq.size() > 1){
+        int cost = 0;
+        
+        while(!pq.isEmpty()){
+            if(pq.size() == 1) break;
+            
             int first = pq.poll();
             int second = pq.poll();
             
-            totalCost += (first+second);
+            cost += first + second;
+            
             pq.offer(first+second);
         }
         
-        return totalCost;
+        return cost;
     }
 }
