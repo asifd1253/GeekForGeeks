@@ -3,14 +3,14 @@ class Solution {
         // code here
         ArrayList<ArrayList<Integer>> res = new ArrayList<>();
         
-        for(int c=0; c<mat[0].length; c++){
+        for(int i=0; i<mat.length; i++){
             ArrayList<Integer> temp = new ArrayList<>();
-            for(int r=0; r<mat.length; r++){
-                temp.add(mat[r][c]);
+            for(int j=0; j<mat[0].length; j++){
+                temp.add(mat[j][i]);
             }
-            res.add(new ArrayList<>(temp));
+            
+            res.add(temp);
         }
-        
         return res;
     }
 }
