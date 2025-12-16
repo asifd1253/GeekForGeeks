@@ -3,22 +3,24 @@
 class Solution {
     int[] getMoreAndLess(int[] arr, int target) {
         // code here
-        int lessEle = 0;
-        int greatEle = 0;
-        int result[] = new int[2];
+        int res[] = new int[2];
+        
+        int lessCount = 0;
+        int greatCount = 0;
         
         for(int i : arr){
             if(i <= target){
-                lessEle++;
+                lessCount++;
             }
             if(i >= target){
-                greatEle++;
+                greatCount++;
             }
         }
         
-        result[0] = lessEle;
-        result[1] = greatEle;
+        res[0] = lessCount;
+        res[1] = greatCount;
         
-        return result;
+        return res;
+        
     }
 }
