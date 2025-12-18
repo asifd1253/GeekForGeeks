@@ -33,20 +33,24 @@ class Solution {
 
         //***************************************************************
         
-        char arr[] = s.toCharArray();
+        // char arr[] = s.toCharArray();
         
-        int left = 0;
-        int right = s.length()-1;
+        // int left = 0;
+        // int right = s.length()-1;
         
-        while(left < right){
-            char temp = arr[left];
-            arr[left] = arr[right];
-            arr[right] = temp;
+        // while(left < right){
+        //     char temp = arr[left];
+        //     arr[left] = arr[right];
+        //     arr[right] = temp;
             
-            left++;
-            right--;
-        }
+        //     left++;
+        //     right--;
+        // }
         
-        return new String(arr);
+        // return new String(arr);
+
+        //***************************************************************
+
+        return new StringBuilder(s).reverse().toString();
     }
 }
