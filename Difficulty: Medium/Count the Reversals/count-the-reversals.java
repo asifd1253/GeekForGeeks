@@ -18,9 +18,9 @@ class Solution {
             }
         }
         
-        int totalLeftReversals = (int)Math.ceil(left/2.0);
-        int totalRightReversals = (int)Math.ceil(right/2.0);
+        int totalLeftReversal = (int)Math.ceil(left/2.0);
+        int totalRightReversal = (int)Math.ceil(right/2.0);
         
-        return totalLeftReversals+totalRightReversals;
+        return totalLeftReversal + totalRightReversal;
     }
 }
