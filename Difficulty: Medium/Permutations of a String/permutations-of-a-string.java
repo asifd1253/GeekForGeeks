@@ -1,24 +1,20 @@
 class Solution {
     
-    ArrayList<String> backtrack(char arr[], ArrayList<String> res, StringBuilder sb, boolean usedChar[]){
-        if(arr.length == sb.length()){
+    ArrayList<String> generatePermutation(ArrayList<String> res, char arr[], StringBuilder sb, boolean usedChar[]){
+        if(sb.length() == arr.length){
             res.add(sb.toString());
             return res;
         }
         
         for(int i=0; i<arr.length; i++){
-            if(usedChar[i]){
-                continue;
-            }
+            if(usedChar[i]) continue;
             
-            if(i > 0 && arr[i] == arr[i-1] && !usedChar[i-1]){
-                continue;
-            }
+            if(i>0 && arr[i]==arr[i-1] && !usedChar[i-1]) continue;
             
             usedChar[i] = true;
             sb.append(arr[i]);
             
-            backtrack(arr, res, sb, usedChar);
+            generatePermutation(res, arr, sb, usedChar);
             
             sb.deleteCharAt(sb.length()-1);
             usedChar[i] = false;
@@ -26,7 +22,6 @@ class Solution {
         
         return res;
     }
-    
     public ArrayList<String> findPermutation(String s) {
         // Code here
         ArrayList<String> res = new ArrayList<>();
@@ -37,8 +32,8 @@ class Solution {
         
         StringBuilder sb = new StringBuilder();
         
-        boolean usedChar[] = new boolean[s.length()];
+        boolean usedChar[] = new boolean[arr.length];
         
-        return backtrack(arr, res, sb, usedChar);
+        return generatePermutation(res, arr, sb, usedChar);
     }
 }
