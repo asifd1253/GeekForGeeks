@@ -6,6 +6,7 @@ class Solution {
         ArrayList<ArrayList<Integer>> res = new ArrayList<>();
         
         Arrays.sort(arr);
+        
         int left = 0;
         int right = arr.length-1;
         
@@ -13,17 +14,21 @@ class Solution {
             int sum = arr[left] + arr[right];
             
             if(sum == 0){
-                ArrayList<Integer> in = new ArrayList<>();
-                in.add(arr[left]);
-                in.add(arr[right]);
-                res.add(in);
+                ArrayList<Integer> temp = new ArrayList<>();
+                
+                temp.add(arr[left]);
+                temp.add(arr[right]);
+                
+                res.add(temp);
                 
                 while(left < right && arr[left] == arr[left+1]){
                     left++;
                 }
+                
                 while(left < right && arr[right] == arr[right-1]){
                     right--;
                 }
+                
                 left++;
                 right--;
             }else if(sum < 0){
