@@ -8,11 +8,11 @@ class Solution {
             map.put(i, map.getOrDefault(i, 0)+1);
         }
         
-        for(int i : b){
-            if(!map.containsKey(i) || map.get(i) == 0){
+        for(int j : b){
+            if(!map.containsKey(j) || map.get(j) == 0){
                 return false;
             }else{
-                map.put(i, map.getOrDefault(i, 0)-1);
+                map.put(j, map.getOrDefault(j, 0)-1);
             }
         }
         
