@@ -1,51 +1,44 @@
 class Solution {
-    boolean isValid(int arr[], int mid, int M){
+    boolean isValidRange(int arr[], int maxAllowPages, int k){
         int students = 1;
-        int pages = 0;
+        int curPages = 0;
         
-        for(int i=0; i<arr.length; i++){
-            if(arr[i] > mid){     //Edge case
-                return false;
-            }
+        for(int pages : arr){
+            if(pages > maxAllowPages) return false;
             
-            if(arr[i] + pages <= mid){
-                pages += arr[i];
+            if(pages + curPages <= maxAllowPages){
+                curPages += pages;
             }else{
                 students++;
-                pages = arr[i];
+                curPages = pages;
             }
         }
         
-        return students <= M ?true:false;
+        return (students<=k)?true:false;
     }
-    
-    public int findPages(int[] arr, int M) {
+    public int findPages(int[] arr, int k) {
         // code here
-        if(arr.length < M){
-            return -1;
-        }
+        if(arr.length < k) return -1;
         
-        int range = 0;
-        for(int i : arr){
-            range += i;
-        }
+        int pagesRange = 0;
+        for(int i : arr) pagesRange += i;
         
-        int start = 0;
-        int end = range;
-        int ans = -1;
+        int st = 0;
+        int end = pagesRange;
         
-        while(start <= end){
-            int mid = start + (end - start)/2;
+        int ans = 0;
+        
+        while(st <= end){
+            int mid = st + (end-st)/2;
             
-            if(isValid(arr, mid, M)){
+            if(isValidRange(arr, mid, k)){
                 ans = mid;
-                end = mid -1;
+                end = mid-1;
             }else{
-                start = mid +1;
+                st = mid+1;
             }
         }
         
         return ans;
-        
     }
 }
