@@ -1,30 +1,23 @@
 class Solution {
     int maxProduct(int[] arr) {
         // code here
-        int max = Integer.MIN_VALUE;
-        int product = 1;
+        int n = arr.length;
         
-        for(int i=0; i<arr.length; i++){
-            product *= arr[i];
+        int leftProd = 1;
+        int rightProd = 1;
+        
+        int ans = arr[0];
+        
+        for(int i=0; i<n; i++){
+            leftProd = (leftProd == 0)?1:leftProd;
+            rightProd = (rightProd == 0)?1:rightProd;
             
-            max = Math.max(max, product);
+            leftProd *= arr[i];
+            rightProd *= arr[n-1-i];
             
-            if(product == 0){
-                product = 1;
-            }
+            ans = Math.max(ans, Math.max(leftProd, rightProd));
         }
         
-        product = 1;
-        for(int i=arr.length-1; i>=0; i--){
-            product *= arr[i];
-            
-            max = Math.max(max, product);
-            
-            if(product == 0){
-                product = 1;
-            }
-        }
-        
-        return max;
+        return ans;
     }
 }
