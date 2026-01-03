@@ -3,25 +3,18 @@ class Solution {
         // code here
         HashMap<Character, Integer> map = new HashMap<>();
         
-        for(int i=0; i<s1.length(); i++){
-            char ch = s1.charAt(i);
-            map.put(ch, map.getOrDefault(ch, 0)+1);
+        for(char c : s1.toCharArray()){
+            map.put(c, map.getOrDefault(c, 0)+1);
         }
         
-        for(int i=0; i<s2.length(); i++){
-            char ch = s2.charAt(i);
-            if(map.containsKey(ch)){
-                map.put(ch, map.getOrDefault(ch, 0)-1);
-                if(map.get(ch) == 0){
-                    map.remove(ch);
-                }
+        for(char c : s2.toCharArray()){
+            if(map.containsKey(c)){
+                map.put(c, map.getOrDefault(c, 0)-1);
+                
+                if(map.get(c) == 0) map.remove(c);
             }else{
                 return false;
             }
-        }
-        
-        if(map.size() != 0){
-            return false;
         }
         
         return true;
