@@ -4,9 +4,8 @@ class Solution {
 
     public int findK(int arr[][], int n, int m, int k) {
         // Your code goes here
-        
-        int res[] = new int[n*m];
-        int idx = 0;
+        int res = -1;
+        int counter = 0;
         
         int startRow = 0;
         int startCol = 0;
@@ -14,22 +13,28 @@ class Solution {
         int endCol = arr[0].length-1;
         
         while(startRow <= endRow && startCol <= endCol){
-            //top 
-            for(int i=startCol; i<= endCol; i++){
-                res[idx++] = arr[startRow][i];
+            //top
+            for(int i=startCol; i<=endCol; i++){
+                res = arr[startRow][i];
+                counter++;
+                if(counter == k) return res;
             }
             startRow++;
             
             //right
             for(int i=startRow; i<=endRow; i++){
-                res[idx++] = arr[i][endCol];
+                res = arr[i][endCol];
+                counter++;
+                if(counter == k) return res;
             }
             endCol--;
             
-            // bottom
+            //bottom
             if(startRow <= endRow){
                 for(int i=endCol; i>=startCol; i--){
-                    res[idx++] = arr[endRow][i];
+                    res = arr[endRow][i];
+                    counter++;
+                    if(counter == k) return res;
                 }
                 endRow--;
             }
@@ -38,13 +43,14 @@ class Solution {
             //left
             if(startCol <= endCol){
                 for(int i=endRow; i>=startRow; i--){
-                    res[idx++] = arr[i][startCol];
+                    res = arr[i][startCol];
+                    counter++;
+                    if(counter == k) return res;
                 }
-                startCol++;    
+                startCol++;
             }
-            
         }
         
-        return res[k-1];
+        return res;
     }
 }
