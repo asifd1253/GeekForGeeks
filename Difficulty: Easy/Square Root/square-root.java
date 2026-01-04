@@ -1,23 +1,24 @@
 class Solution {
     int floorSqrt(int n) {
-        if(n == 0 || n == 1){
-            return n;
-        }
+        // code here
+        if(n==0 || n==1) return n;
+        
+        int start = 0;
+        int end = n;
         
         int res = 0;
         
-        int start = 1, end = n;
-        
         while(start <= end){
-            int mid = start + (end - start)/2;
+            int midVal = start + (end - start)/2;
             
-            if(mid <= n/mid){
-                res = mid;
-                start = mid + 1;
+            if(midVal <= n/midVal){
+                res = midVal;
+                start = midVal+1;
             }else{
-                end = mid - 1;
+                end = midVal-1;
             }
         }
+        
         return res;
     }
 }
