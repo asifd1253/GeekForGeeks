@@ -19,7 +19,7 @@ class Solution {
         for(int i=1; i<=3 && i<n-2; i++){
             for(int j=i+1; j<=i+3 && j<n-1; j++){
                 for(int k=j+1; k<=j+3 && k<n; k++){
-                    String part1 = s.substring(0, i);
+                    String part1 = s.substring(0, i);   //(inclusive, exclusive)
                     String part2 = s.substring(i, j);
                     String part3 = s.substring(j, k);
                     String part4 = s.substring(k, n);
