@@ -5,9 +5,10 @@ class Solution {
         // your code here
         Collections.sort(arr);
         
+        int n = arr.size();
+        
         int res = Integer.MAX_VALUE;
         
-        int n = arr.size();
         for(int i=0; i<n-k+1; i++){
             int min = arr.get(i);
             int max = arr.get(i+k-1);
