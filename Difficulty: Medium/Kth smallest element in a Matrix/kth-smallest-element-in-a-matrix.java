@@ -5,7 +5,7 @@ class Solution {
         
         for(int arr[] : mat){
             for(int i : arr){
-                pq.offer(i);
+                pq.add(i);
                 
                 if(pq.size() > k) pq.poll();
             }
