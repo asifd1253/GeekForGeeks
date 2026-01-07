@@ -1,8 +1,8 @@
 class Solution {
     ArrayList<Integer> findTwoElement(int arr[]) {
         // code here
-        ArrayList<Integer> res = new ArrayList<>();
         int n = arr.length;
+        
         int freq[] = new int[n+1];
         
         for(int i=0; i<n; i++){
@@ -13,12 +13,14 @@ class Solution {
         int repeated = -1;
         
         for(int i=1; i<=n; i++){
-            if(freq[i] == 0){
-                missing = i;
-            }else if(freq[i] == 2){
+            if(freq[i] > 1){
                 repeated = i;
+            }else if(freq[i] == 0){
+                missing = i;
             }
         }
+        
+        ArrayList<Integer> res = new ArrayList<>();
         
         res.add(repeated);
         res.add(missing);
