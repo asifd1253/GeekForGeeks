@@ -2,27 +2,20 @@
 class Solution {
     public String longestCommonPrefix(String arr[]) {
         // code here
-        if(arr.length == 0 || arr == null){
-            return "";
-        }
+        if(arr.length == 0) return "";
         
-        String prefixString = arr[0];
+        String firstString = arr[0];
         
         for(int i=1; i<arr.length; i++){
-            String currString = arr[i];
+            String curString = arr[i];
             
-            while(!currString.startsWith(prefixString)){
+            while(!curString.startsWith(firstString)){
+                firstString = firstString.substring(0, firstString.length()-1);
                 
-                // let original prefixString characters = 6
-                // Here is the main logic .substring(0, n) ---> (0, 6) = 5 charecters
-                prefixString = prefixString.substring(0, prefixString.length() - 1);
-                
-                if(prefixString.length() == 0){
-                    return "";
-                }
+                if(firstString.length() == 0) return "";
             }
         }
         
-        return prefixString;
+        return firstString;
     }
 }
