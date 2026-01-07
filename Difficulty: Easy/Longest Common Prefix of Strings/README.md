@@ -1,9 +1,80 @@
-<h2><a href="https://www.geeksforgeeks.org/problems/longest-common-prefix-in-an-array5129/1">Longest Common Prefix of Strings</a></h2><h3>Difficulty Level : Difficulty: Easy</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size: 18px;">Given an array of strings <strong>arr[].</strong>&nbsp;Return the <strong>longest common prefix</strong> among each and every strings present in the array. </span><span style="font-size: 18px;">If there's no prefix common in all the strings, return "".</span></p>
-<p><span style="font-size: 18px;"><strong>Examples :</strong></span></p>
-<pre><span style="font-size: 18px;"><strong>Input: </strong>arr[] = ["geeksforgeeks", "geeks", "geek", "geezer"]
-<strong>Output:</strong> "gee"
-<strong>Explanation</strong>: "gee" is the longest common prefix in all the given strings.<br></span></pre>
-<pre><span style="font-size: 18px;"><strong>Input</strong>: arr[] = ["hello", "world"]
-<strong>Output:</strong> ""
-<strong>Explanation</strong>: There's no common prefix in the given strings.</span></pre>
-<p><span style="font-size: 18px;"><strong>Constraints:</strong><br>1 ≤ |arr| ≤ 10<sup>3</sup><br>1 ≤ |arr[i]| ≤ 10<sup>3</sup></span></p></div><p><span style=font-size:18px><strong>Company Tags : </strong><br><code>VMWare</code>&nbsp;<code>Microsoft</code>&nbsp;<code>Google</code>&nbsp;<br><p><span style=font-size:18px><strong>Topic Tags : </strong><br><code>Arrays</code>&nbsp;<code>Strings</code>&nbsp;<code>Data Structures</code>&nbsp;
+🧩 Let’s Dry Run Your Code
+
+Input:
+
+arr = ["geeksforgeeks", "geeks", "geek", "geezer"]
+
+Step 1: Initialization
+firstString = "geeksforgeeks"
+
+Step 2: i = 1 → curString = "geeks"
+
+Now we check:
+
+!curString.startsWith(firstString)
+→ !"geeks".startsWith("geeksforgeeks")
+→ !false → true ✅
+
+
+So we enter the while loop.
+
+We now shorten firstString by removing the last character:
+
+firstString = firstString.substring(0, firstString.length() - 1);
+
+
+→ "geeksforgeek"
+→ "geeksforgee"
+→ "geeksforge"
+→ "geeksforg"
+→ "geeksfor"
+→ "geeksf"
+→ "geeks"
+
+Now check again:
+
+"geeks".startsWith("geeks") → true
+
+
+So the condition !true → false — we exit the loop.
+
+✅ Now: firstString = "geeks"
+
+Step 3: i = 2 → curString = "geek"
+
+Check:
+
+!"geek".startsWith("geeks")
+→ !"false"
+→ true ✅
+
+
+→ so we shorten "geeks" → "geek"
+
+Now:
+
+!"geek".startsWith("geek") → !true → false
+
+
+✅ exit loop → firstString = "geek"
+
+Step 4: i = 3 → curString = "geezer"`
+
+Check:
+
+!"geezer".startsWith("geek")
+→ !"false" → true ✅
+
+
+Shrink "geek" → "gee"
+
+Now check again:
+
+!"geezer".startsWith("gee")
+→ !"true" → false
+
+
+✅ Exit loop → firstString = "gee"
+
+✅ Final Output:
+"gee"
