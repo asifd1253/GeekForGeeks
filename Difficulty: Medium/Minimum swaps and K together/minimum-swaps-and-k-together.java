@@ -1,33 +1,3 @@
-//{ Driver Code Starts
-// Initial Template for Java
-
-import java.io.*;
-import java.util.*;
-
-class GFG {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int tc = Integer.parseInt(br.readLine().trim());
-
-        while (tc-- > 0) {
-
-            String[] str = br.readLine().trim().split(" ");
-            int[] a = new int[str.length];
-            for (int i = 0; i < str.length; i++) {
-                a[i] = Integer.parseInt(str[i]);
-            }
-            String[] nk = br.readLine().trim().split(" ");
-            int k = Integer.parseInt(nk[0]);
-            Solution sln = new Solution();
-            int ans = sln.minSwap(a, k);
-
-            System.out.println(ans);
-        }
-    }
-}
-// } Driver Code Ends
-
-
 // User function Template for Java
 
 class Solution {
@@ -36,39 +6,34 @@ class Solution {
         // Complete the function
         int n = arr.length;
         
-        int windowSize = 0;
-        for(int i=0; i<arr.length; i++){
-            if(arr[i] <= k){
-                windowSize++;
-            }
+        int winSize = 0;
+        
+        for(int i : arr){
+            if(i <= k) winSize++;
         }
         
-        int badcount = 0;
-        for(int i=0; i<windowSize; i++){
-            if(arr[i] > k){
-                badcount++;
-            }
+        int nonFav = 0;
+        
+        for(int i=0; i<winSize; i++){
+            if(arr[i] > k) nonFav++;
         }
         
-        int start = 0;
-        int end = windowSize;
-        int minswap = badcount;
+        int st = 0;
+        int end = winSize;
+        
+        int res = nonFav;
         
         while(end < n){
-            if(arr[end] > k){
-                badcount++;
-            }
+            if(arr[end] > k) nonFav++;
             
-            if(arr[start] > k){
-                badcount--;
-            }
+            if(arr[st] > k) nonFav--;
             
-            minswap = Math.min(minswap, badcount);
+            res = Math.min(res, nonFav);
             
-            start++;
+            st++;
             end++;
         }
         
-        return minswap;
+        return res;
     }
 }
