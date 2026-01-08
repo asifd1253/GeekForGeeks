@@ -4,18 +4,22 @@ class Solution {
         // code here
         Arrays.sort(arr);
         
-        int i=0;
-        int j=1;
+        int n = arr.length;
         
-        while(i<arr.length && j<arr.length){
-            int diff = arr[j] - arr[i];
-            if(i != j && diff == x){
+        int i = 0;
+        int j = 1;
+        
+        while(i< n && j < n){
+            int curDiff = arr[j]-arr[i];
+            
+            if(i != j && curDiff == x){
                 return true;
-            }else if(diff < x){
+            }else if(curDiff < x){
                 j++;
             }else{
                 i++;
             }
+         
         }
         
         return false;
