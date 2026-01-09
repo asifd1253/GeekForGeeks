@@ -1,15 +1,15 @@
 class Solution {
     public void reverseArray(int arr[]) {
         // code here
-        int start = 0;
+        int st = 0;
         int end = arr.length-1;
         
-        while(start <= end){
-            int temp = arr[start];
-            arr[start] = arr[end];
+        while(st < end){
+            int temp = arr[st];
+            arr[st] = arr[end];
             arr[end] = temp;
             
-            start++;
+            st++;
             end--;
         }
         
