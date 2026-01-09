@@ -1,8 +1,8 @@
 class Solution {
     static List<Integer> firstNegInt(int arr[], int k) {
         // write code here
-        Queue<Integer> q = new LinkedList<>();
         int n = arr.length;
+        Queue<Integer> q = new LinkedList<>();
         List<Integer> res = new ArrayList<>();
         
         int idx = 0;
@@ -10,8 +10,10 @@ class Solution {
             if(arr[idx] < 0){
                 q.offer(arr[idx]);
             }
+            
             idx++;
         }
+        
         if(q.isEmpty()){
             res.add(0);
         }else{
@@ -23,6 +25,7 @@ class Solution {
             if(arr[i-1] < 0){
                 q.poll();
             }
+            
             //add
             if(arr[i+k-1] < 0){
                 q.offer(arr[i+k-1]);
