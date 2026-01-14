@@ -1,22 +1,22 @@
-// User function Template for Java
-
 class Solution {
-    int median(int mat[][]) {
+    public int median(int[][] mat) {
         // code here
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        int r = mat.length;
+        int c = mat[0].length;
         
-        for(int i=0; i<mat.length; i++){
-            for(int j=0; j<mat[0].length; j++){
-                pq.add(mat[i][j]);
+        int size = r*c;
+        
+        for(int arr[] : mat){
+            for(int i : arr){
+                pq.offer(i);
+                if(pq.size() > (size/2 +1)){
+                    pq.poll();
+                }
+                
             }
         }
-        
-        int length = pq.size();
-        
-        for(int i=0; i<length/2; i++){
-            pq.remove();
-        }
-        
+       
         return pq.peek();
     }
 }
