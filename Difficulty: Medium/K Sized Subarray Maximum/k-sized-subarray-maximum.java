@@ -1,4 +1,3 @@
-
 class Pair implements Comparable<Pair>{
     int val;
     int idx;
@@ -10,23 +9,22 @@ class Pair implements Comparable<Pair>{
     
     @Override
     public int compareTo(Pair p2){
-        //ascending order
+        // ascending order
         // return this.val - p2.val;
         
-        //descending order
+        // descending order
         return p2.val - this.val;
     }
 }
 
 class Solution {
     public ArrayList<Integer> maxOfSubarrays(int[] arr, int k) {
-        // code here
         int n = arr.length;
+        // code here
         ArrayList<Integer> res = new ArrayList<>();
         
         PriorityQueue<Pair> pq = new PriorityQueue<>();
         
-        //1st window
         for(int i=0; i<k; i++){
             pq.offer(new Pair(arr[i], i));
         }
