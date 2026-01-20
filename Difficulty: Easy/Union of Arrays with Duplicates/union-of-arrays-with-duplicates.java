@@ -1,16 +1,22 @@
 class Solution {
-    public static int findUnion(int a[], int b[]) {
+    public static ArrayList<Integer> findUnion(int[] a, int[] b) {
         // code here
+        ArrayList<Integer> res = new ArrayList<>();
+        
         HashSet<Integer> set = new HashSet<>();
         
-        for(int i=0; i<a.length; i++){
-            set.add(a[i]);
+        for(int i : a){
+            set.add(i);
         }
         
-        for(int j=0; j<b.length; j++){
-            set.add(b[j]);
+        for(int i : b){
+            set.add(i);
         }
         
-        return set.size();
+        for(int val : set){
+            res.add(val);
+        }
+        
+        return res;
     }
 }
