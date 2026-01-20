@@ -1,26 +1,24 @@
 class Solution {
     public static int solve(int n, String s) {
         // code here
-        HashSet<Character> comAlloted = new HashSet<>();
-        HashSet<Character> rejectPersons = new HashSet<>();
+        HashSet<Character> comAllotedPerson = new HashSet<>();
+        int totCom = n;
         
         int res = 0;
-        int totalCom = n;
+        HashSet<Character> comRejectedPerson = new HashSet<>();
         
-        for(char ch : s.toCharArray()){
-            if(comAlloted.contains(ch)){
-                comAlloted.remove(ch);
-                totalCom++;
-            }else if(rejectPersons.contains(ch)){
-                rejectPersons.remove(ch);
+        for(char c : s.toCharArray()){
+            if(comAllotedPerson.contains(c)){
+                comAllotedPerson.remove(c);
+                totCom++;
+            }else if(comRejectedPerson.contains(c)){
+                comRejectedPerson.remove(c);
+            }else if(totCom > 0){
+                comAllotedPerson.add(c);
+                totCom--;
             }else{
-                if(totalCom > 0){
-                    comAlloted.add(ch);
-                    totalCom--;
-                }else{
-                    rejectPersons.add(ch);
-                    res++;
-                }
+                comRejectedPerson.add(c);
+                res++;
             }
         }
         
