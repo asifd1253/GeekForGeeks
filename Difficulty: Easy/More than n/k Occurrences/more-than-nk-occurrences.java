@@ -2,6 +2,9 @@ class Solution {
     // Function to find all elements in array that appear more than n/k times.
     public int countOccurence(int[] arr, int k) {
         // your code here,return the answer
+        int n = arr.length;
+        int times = n/k;
+        
         HashMap<Integer, Integer> map = new HashMap<>();
         
         for(int i : arr){
@@ -9,8 +12,6 @@ class Solution {
         }
         
         int res = 0;
-        
-        int times = arr.length/k;
         
         for(int key : map.keySet()){
             if(map.get(key) > times) res++;
