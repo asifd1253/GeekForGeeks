@@ -1,37 +1,38 @@
 class Solution {
-    boolean isValidRange(int arr[], int maxAllowPages, int k){
-        int students = 1;
+    boolean isValid(int arr[], int maxAllowPages, int totStu){
+        int stu = 1;
         int curPages = 0;
         
         for(int pages : arr){
             if(pages > maxAllowPages) return false;
             
-            if(pages + curPages <= maxAllowPages){
+            if(curPages+pages <= maxAllowPages){
                 curPages += pages;
             }else{
-                students++;
+                stu++;
                 curPages = pages;
             }
         }
         
-        return (students<=k)?true:false;
+        return stu <= totStu ? true:false;
     }
     public int findPages(int[] arr, int k) {
         // code here
         if(arr.length < k) return -1;
         
-        int pagesRange = 0;
-        for(int i : arr) pagesRange += i;
+        int totalRange = 0;
+        
+        for(int i : arr) totalRange += i;
         
         int st = 0;
-        int end = pagesRange;
+        int end = totalRange;
         
-        int ans = 0;
+        int ans = Integer.MAX_VALUE;
         
         while(st <= end){
             int mid = st + (end-st)/2;
             
-            if(isValidRange(arr, mid, k)){
+            if(isValid(arr, mid, k)){
                 ans = mid;
                 end = mid-1;
             }else{
