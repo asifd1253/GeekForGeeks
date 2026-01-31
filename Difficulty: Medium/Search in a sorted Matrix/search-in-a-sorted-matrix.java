@@ -1,27 +1,28 @@
 class Solution {
-    public boolean searchMatrix(int[][] mat, int target) {
+    public boolean searchMatrix(int[][] mat, int x) {
         // code here
-        if(mat.length == 0) return false;
-        
-        int rowLen = mat.length;
-        int colLen = mat[0].length;
+        int rows = mat.length;
+        int cols = mat[0].length;
         
         int st = 0;
-        int end = rowLen*colLen-1;
+        int end = rows*cols-1;
         
-        while(st <=end){
+        int cLen = mat[0].length;
+        
+        while(st <= end){
             int mid = st + (end-st)/2;
             
-            int rAdd = mid / colLen;
-            int cAdd = mid % colLen;
-            int val = mat[rAdd][cAdd];
+            int rIdx = mid / cLen;
+            int cIdx = mid % cLen;
             
-            if(val == target){
+            int midVal = mat[rIdx][cIdx];
+            
+            if(midVal == x){
                 return true;
-            }else if(val < target){
-                st = mid+1;
-            }else{
+            }else if(x < midVal){
                 end = mid-1;
+            }else{
+                st = mid+1;
             }
         }
         
