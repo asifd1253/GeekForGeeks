@@ -1,31 +1,40 @@
 class Solution {
-    boolean canIEatInThisTime(int bananas[], int speed, int hours){
-        int hour = 0;
+    boolean isValidSpeed(int arr[], int maxSpeedAllow, int totHours){
+        int reqHours = 0;
         
-        for(int banana : bananas){
-            hour += (int)Math.ceil((double)banana / speed);
+        for(int bananas : arr){
+            int curHours = (int)Math.ceil((double)bananas/maxSpeedAllow);
+            
+            if(curHours > totHours) return false;
+            
+            if(curHours+reqHours <= totHours){
+                reqHours = reqHours + curHours;
+            }else{
+                return false;
+            }
         }
         
-        return hour <= hours;
+        return reqHours <= totHours;
     }
-    
-    public int kokoEat(int[] bananas, int hours) {
+    public int kokoEat(int[] arr, int k) {
         // code here
-        int minSpeed = 1;
         int maxSpeed = 0;
-        for(int banana : bananas){
-            maxSpeed = Math.max(maxSpeed, banana);
+        for(int i : arr){
+            maxSpeed = Math.max(maxSpeed, i);
         }
+        
+        int st = 1;
+        int end = maxSpeed;
         
         int ans = -1;
-        while(minSpeed <= maxSpeed){
-            int mid = minSpeed + (maxSpeed - minSpeed)/2;
+        while(st <= end){
+            int mid = st + (end-st)/2;
             
-            if(canIEatInThisTime(bananas, mid, hours)){
+            if(isValidSpeed(arr, mid, k)){
                 ans = mid;
-                maxSpeed = mid - 1;
+                end = mid-1;
             }else{
-                minSpeed = mid + 1;
+                st = mid+1;
             }
         }
         
