@@ -6,16 +6,19 @@ class Solution {
         // Complete the function
         HashMap<Integer, Integer> map = new HashMap<>();
         
-        int count = 0;
+        int res = 0;
         
-        for(int i : arr){
-            int complement = target - i;
+        for(int curNum : arr){
+            int complement = target - curNum;
             
-            if(map.containsKey(complement)) count += map.get(complement);
+            if(map.containsKey(complement)){
+                res = res + map.get(complement);
+            }
             
-            map.put(i, map.getOrDefault(i, 0)+1);
+            map.put(curNum, map.getOrDefault(curNum, 0)+1);
+            
         }
         
-        return count;
+        return res;
     }
 }
