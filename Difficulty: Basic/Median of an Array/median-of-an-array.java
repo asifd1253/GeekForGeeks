@@ -6,8 +6,8 @@ class Solution {
         int n = arr.length;
         
         if(n%2 == 0){
-            double ans = (arr[n/2] + arr[n/2 - 1])/2.0;
-            return ans;
+            double res = (arr[n/2]+arr[(n/2)-1])/2.0;
+            return res;
         }else{
             return (double)arr[n/2];
         }
