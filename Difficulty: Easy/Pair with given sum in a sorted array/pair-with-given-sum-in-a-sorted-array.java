@@ -7,16 +7,14 @@ class Solution {
         HashMap<Integer, Integer> map = new HashMap<>();
         
         int res = 0;
-        
-        for(int curNum : arr){
-            int complement = target - curNum;
+        for(int i : arr){
+            int compliment = target - i;
             
-            if(map.containsKey(complement)){
-                res = res + map.get(complement);
+            if(map.containsKey(compliment)){
+                res = res + map.get(compliment);
             }
             
-            map.put(curNum, map.getOrDefault(curNum, 0)+1);
-            
+            map.put(i, map.getOrDefault(i, 0)+1);
         }
         
         return res;
