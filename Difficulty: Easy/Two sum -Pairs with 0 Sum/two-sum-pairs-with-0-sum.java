@@ -3,41 +3,40 @@
 class Solution {
     public static ArrayList<ArrayList<Integer>> getPairs(int[] arr) {
         // code here
-        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
-        
         Arrays.sort(arr);
         
-        int left = 0;
-        int right = arr.length-1;
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
         
-        while(left < right){
-            int sum = arr[left] + arr[right];
+        int i = 0;
+        int j = arr.length-1;
+        
+        while(i < j){
+            int curSum = arr[i]+arr[j];
             
-            if(sum == 0){
+            if(curSum == 0){
                 ArrayList<Integer> temp = new ArrayList<>();
                 
-                temp.add(arr[left]);
-                temp.add(arr[right]);
+                temp.add(arr[i]);
+                temp.add(arr[j]);
                 
                 res.add(temp);
                 
-                while(left < right && arr[left] == arr[left+1]){
-                    left++;
+                while(i < j && arr[i] == arr[i+1]){
+                    i++;
                 }
                 
-                while(left < right && arr[right] == arr[right-1]){
-                    right--;
+                while(i < j && arr[j] == arr[j-1]){
+                    j--;
                 }
                 
-                left++;
-                right--;
-            }else if(sum < 0){
-                left++;
+                i++;
+                j--;
+            }else if(curSum < 0){
+                i++;
             }else{
-                right--;
+                j--;
             }
         }
-        
         return res;
     }
 }
