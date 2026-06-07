@@ -1,10 +1,17 @@
 class Solution {
-    public boolean isSorted(int[] arr) {
-        // code here
-        for(int i=0; i<arr.length-1; i++){
-            if(arr[i] > arr[i+1]) return false;
+    boolean checker(int arr[], int idx){
+        if(idx == arr.length-1){
+            return true;
         }
         
-        return true;
+        if(arr[idx] > arr[idx+1]){
+            return false;
+        }
+        
+        return checker(arr, idx+1);
+    }
+    public boolean isSorted(int[] arr) {
+        // code here
+        return checker(arr, 0);
     }
 }
