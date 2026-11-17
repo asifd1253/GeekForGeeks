@@ -1,78 +1,64 @@
-/*
-The structure of linked list is the following
-
-class Node
-{
-int data;
-Node next;
-    Node(int key)
-    {
+/* Structure of a Linked List node
+class Node {
+    int data;
+    Node next;
+    Node(int key) {
         data = key;
         next = null;
     }
-}
-*/
+} */
 
 class Solution {
-    static Node findMid(Node head){
-        Node slow = head;
-        Node fast = head.next;
+    public Node merge(Node head1,Node head2){
+        Node ansHead = new Node(-1);
+        Node ansTail = ansHead;
         
-        while(fast != null && fast.next != null){
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-        
-        return slow;
-    }
-    
-    static Node merge(Node leftHead, Node rightHead){
-        Node dummy = new Node(-1);
-        Node temp = dummy;
-        
-        while(leftHead != null && rightHead != null){
-            if(leftHead.data < rightHead.data){
-                temp.next = leftHead;
-                leftHead = leftHead.next;
+        while(head1!=null && head2!=null){
+            if(head1.data <= head2.data){
+                ansTail.next = new Node(head1.data);
+                head1=head1.next;
             }else{
-                temp.next = rightHead;
-                rightHead = rightHead.next;
+                ansTail.next = new Node(head2.data);
+                head2=head2.next;
             }
-            temp = temp.next;
+            ansTail = ansTail.next;
         }
         
-        //Remaining leftHead list
-        while(leftHead != null){
-            temp.next = leftHead;
-            temp = temp.next;
-            leftHead = leftHead.next;
+        while(head1!=null){
+            ansTail.next = new Node(head1.data);
+            head1=head1.next;
+            ansTail = ansTail.next;
         }
         
-        //Remaining rightHead list
-        while(rightHead != null){
-            temp.next = rightHead;
-            temp = temp.next;
-            rightHead = rightHead.next;
+        while(head2!=null){
+            ansTail.next = new Node(head2.data);
+            head2=head2.next;
+            ansTail = ansTail.next;
         }
         
-        return dummy.next;
+        ansHead=ansHead.next;
+        return ansHead;
     }
-    
-    // Function to sort the given linked list using Merge Sort.
-    static Node mergeSort(Node head) {
-        // add your code here
-        if(head == null || head.next == null){
+    public Node mergeSort(Node head) {
+        // code here
+        if(head==null || head.next==null){
             return head;
         }
+        Node prev = null;
+        Node slow = head;
+        Node fast = head;
         
-        Node mid = findMid(head);
+        while(fast!=null && fast.next!=null){
+            prev=slow;
+            slow=slow.next;
+            fast=fast.next.next;
+        }
         
-        Node rightHead = mid.next;
-        mid.next = null;
+        prev.next=null;
         
-        Node newLeftHead = mergeSort(head);
-        Node newRightHead = mergeSort(rightHead);
-       
-        return merge(newLeftHead, newRightHead);
+        Node head1=mergeSort(head);
+        Node head2=mergeSort(slow);
+        
+        return merge(head1, head2);
     }
 }
