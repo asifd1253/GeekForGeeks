@@ -1,6 +1,4 @@
-/*
-
-Definition for doubly Link List Node
+/* Structure of a Doubly Linked List Node
 class Node {
     int data;
     Node next;
@@ -8,44 +6,31 @@ class Node {
 
     Node(int val) {
         data = val;
-        next = null;
-        prev = null;
+        next = prev = null;
     }
-}
-*/
+}*/
+
 class Solution {
-    public Node deleteNode(Node head, int x) {
+    public Node delPos(Node head, int k) {
         // code here
-        if(head == null){
-            return null;
+        Node prev=null;
+        Node cur=head;
+        
+        for(int i=1; i<k; i++){
+            prev=cur;
+            cur=cur.next;
         }
         
-        if(x == 1){
-            Node newHead = head.next;
-            if(newHead != null){
-                newHead.prev = null;
-            }
-            
+        if(k==1){
+            Node newHead = cur.next;
+            newHead.prev=null;
             return newHead;
         }
         
-        
-        
-        Node prev = null;
-        Node curr = head;
-        
-        for(int i=1; i<x; ++i){
-            prev = curr;
-            curr = curr.next;
+        prev.next=cur.next;
+        if(cur.next!=null){
+            cur.next.prev=prev;
         }
-        
-        prev.next = curr.next;
-        
-        if(curr.next != null){
-            curr.next.prev = prev;
-        }
-       
         return head;
-        
     }
 }
