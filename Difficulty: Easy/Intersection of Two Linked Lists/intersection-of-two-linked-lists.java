@@ -1,47 +1,44 @@
-/* structure of list Node:
+/* structure of list node:
 
 class Node
 {
     int data;
     Node next;
-
-    Node(int a)
-        {
-            data = a;
-            next = null;
-        }
+    Node(int val)
+    {
+        data=val;
+        next=null;
+    }
 }
 
 */
 
 class Solution {
-    // Function to find the intersection of two linked lists
     public Node findIntersection(Node head1, Node head2) {
-      
+        // code here
         HashSet<Integer> set = new HashSet<>();
         
         Node temp = head2;
         
-        while(temp != null){
+        while(temp!=null){
             set.add(temp.data);
             temp = temp.next;
         }
         
-        Node dummy = new Node(-1);
-        Node tail = dummy;
-        
         temp = head1;
         
-        while(temp != null){
+        Node res = new Node(-1);
+        Node tail = res;
+        
+        while(temp!=null){
             if(set.contains(temp.data)){
-                Node newNode = new Node(temp.data);
-                tail.next = newNode;
+                Node node=new Node(temp.data);
+                tail.next = node;
                 tail = tail.next;
             }
             temp = temp.next;
         }
         
-        return dummy.next;
-        
+        return res.next;
     }
 }
