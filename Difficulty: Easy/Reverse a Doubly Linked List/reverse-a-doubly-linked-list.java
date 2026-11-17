@@ -1,33 +1,31 @@
-/*
-class DLLNode {
+/* Structure of Doubly Linked List Node
+class Node {
     int data;
-    DLLNode next;
-    DLLNode prev;
+    Node next;
+    Node prev;
 
-    DLLNode(int val) {
-        data = val;
-        next = null;
-        prev = null;
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+        this.prev = null;
     }
 }
 */
 class Solution {
-    public DLLNode reverseDLL(DLLNode head) {
-        // Your code here
-        DLLNode prev = null;
-        DLLNode curr = head;
-        DLLNode nextNode;
+    public Node reverse(Node head) {
+        // code here
+        Node prev=null;
+        Node cur=head;
+        Node curNext=null;
         
-        while(curr != null){
-            nextNode = curr.next;
-
-            curr.next = prev;
-            prev = curr;
-            curr = nextNode;
+        while(cur!=null){
+            curNext=cur.next;
+            cur.next=prev;
+            cur.prev=curNext;
+            prev=cur;
+            cur=curNext;
         }
-        
-        head = prev;
-        
+        head=prev;
         return head;
     }
 }
