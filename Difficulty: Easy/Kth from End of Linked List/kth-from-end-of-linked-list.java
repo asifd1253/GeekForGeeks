@@ -1,39 +1,37 @@
-/* Structure of node
-class Node
-{
+/* Structure of Linked List Node
+class Node {
     int data;
     Node next;
-    Node(int d) {data = d; next = null; }
+    Node(int x) {
+        data = x;
+        next = null;
+    }
 } */
 
 class Solution {
-    int length(Node head){
-        int size = 0;
+    public int getKthFromLast(Node head, int k) {
+        // code here
+        if(head == null) return -1;
         
-        Node temp = head;
-        while(temp != null){
-            temp = temp.next;
-            size++;
+        Node cur = head;
+        Node prev = null;
+        
+        while(cur != null){
+            Node newNode = cur.next;
+            
+            cur.next = prev;
+            prev = cur;
+            cur = newNode;
         }
         
-        return size;
-    }
-
-    // Function to find the data of kth node from
-    // the end of a linked list.
-    int getKthFromLast(Node head, int k) {
-        // Your code here
-        int len = length(head);
+        Node temp = prev;
         
-        if(k > len){
-            return -1;
-        }
-        
-        Node temp = head;
-        for(int i=0; i<len-k; i++){
+        for(int i=1; i<k; i++){
+            if(temp == null){
+                return -1;
+            }
             temp = temp.next;
         }
-        
-        return temp.data;
+        return temp==null ? -1 : temp.data;
     }
 }
