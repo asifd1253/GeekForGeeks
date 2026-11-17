@@ -1,35 +1,49 @@
 class Solution {
-    // Function to find all possible paths
+    int tot_rows;
+    int tot_cols;
+    boolean visited[][];
+    ArrayList<String> res;
+    
+    public void solve(int maze[][], int curRow, int curCol, String curPath){
+        if(curRow < 0 || curCol < 0 || curRow >= tot_rows || curCol >= tot_cols || maze[curRow][curCol] == 0){
+            return;
+        }
+        
+        if(visited[curRow][curCol] == true){
+            return;
+        }
+        
+        if(curRow == tot_rows-1 && curCol == tot_cols-1){
+            res.add(curPath);
+            return;
+        }
+        
+        visited[curRow][curCol] = true;
+        
+        // up
+        solve(maze, curRow-1, curCol, curPath+"U");
+        // right
+        solve(maze, curRow, curCol+1, curPath+"R");
+        // down
+        solve(maze, curRow+1, curCol, curPath+"D");
+        // left
+        solve(maze, curRow, curCol-1, curPath+"L");
+        
+        visited[curRow][curCol] = false;
+    }
     public ArrayList<String> ratInMaze(int[][] maze) {
         // code here
-        int n = maze.length;
-        ArrayList<String> res = new ArrayList<>();
-        solve(maze, 0, 0, n, "", res);
+        tot_rows = maze.length;
+        tot_cols = maze[0].length;
+        
+        visited = new boolean[tot_rows][tot_cols];
+        
+        res = new ArrayList<>();
+        
+        solve(maze, 0, 0, "");
+        
         Collections.sort(res);
+        
         return res;
-    }
-    
-    public void solve(int mat[][], int row, int col, int n, String path, ArrayList<String> res){
-        if(row < 0 || row >= n || col < 0 || col >= n || mat[row][col] == 0){
-            return;
-        }
-        if(mat[row][col] == 2){  //marked as visited
-            return;
-        }
-        
-        if(row == n-1 && col == n-1){
-            res.add(path);
-            return;
-        }
-        
-        int originalValue = mat[row][col];
-        mat[row][col] = 2;
-        
-        solve(mat, row-1, col, n, path + "U", res);
-        solve(mat, row, col+1, n, path + "R", res);
-        solve(mat, row+1, col, n, path + "D", res);
-        solve(mat, row, col-1, n, path + "L", res);
-        
-        mat[row][col] = originalValue;
     }
 }
