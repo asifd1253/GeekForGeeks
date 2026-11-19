@@ -1,23 +1,12 @@
-
 class Solution {
-    static void insertAtBottom(Stack<Integer> st, int ele){
-        if(st.isEmpty()){
-            st.push(ele);
-            return;
-        }
-        
-        int top = st.pop();
-        insertAtBottom(st, ele);
-        st.push(top);
-    }
-    static void reverse(Stack<Integer> st) {
+    public static void reverseStack(Stack<Integer> st) {
         // code here
-        if(st.isEmpty()){
-            return;
+        Queue<Integer> q=new LinkedList<>();
+        while(!st.isEmpty()){
+            q.add(st.pop());
         }
-        
-        int temp = st.pop();
-        reverse(st);
-        insertAtBottom(st, temp);
+        while(!q.isEmpty()){
+            st.push(q.remove());
+        }
     }
 }
