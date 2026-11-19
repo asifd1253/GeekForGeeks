@@ -1,50 +1,50 @@
 class Solution {
     public static int getMaxArea(int arr[]) {
-        // your code here
-        int maxArea = 0;
-        int nsl[] = new int[arr.length];
-        int nsr[] = new int[arr.length];
+        // code here
+        int n=arr.length;
         
-        //Next smaller left
-        Stack<Integer> st = new Stack<>();
+        Stack<Integer> st=new Stack<>();
         
-        for(int i=0; i<arr.length; i++){
-            while(!st.isEmpty() && arr[st.peek()] >= arr[i]){
+        int smallerLeft[] = new int[n];
+        
+        for(int i=0; i<n; i++){
+            while(!st.isEmpty() && arr[i] <= arr[st.peek()]){
                 st.pop();
             }
-            
             if(st.isEmpty()){
-                nsl[i] = -1;
+                smallerLeft[i] = -1;
             }else{
-                nsl[i] = st.peek();
+                smallerLeft[i] = st.peek();
             }
             
             st.push(i);
         }
         
-        //Next smaller right
         st = new Stack<>();
         
-        for(int i=arr.length-1; i>=0; i--){
-            while(!st.isEmpty() && arr[st.peek()] >= arr[i]){
+        int smallerRight[] = new int[n];
+        
+        for(int i=n-1; i>=0; i--){
+            while(!st.isEmpty() && arr[i] <= arr[st.peek()]){
                 st.pop();
             }
-            
             if(st.isEmpty()){
-                nsr[i] = arr.length;
+                smallerRight[i] = n;
             }else{
-                nsr[i] = st.peek();
+                smallerRight[i] = st.peek();
             }
             st.push(i);
         }
         
-        //Calculate maxArea
-        for(int i=0; i<arr.length; i++){
+        int maxArea = Integer.MIN_VALUE;
+        
+        for(int i=0; i<n; i++){
             int height = arr[i];
-            int width = nsr[i] - nsl[i] - 1;
+            int width = smallerRight[i] - smallerLeft[i] -1;
             
-            int area = width * height;
-            maxArea = Math.max(area, maxArea);
+            int curArea = height * width;
+            
+            maxArea = Math.max(maxArea, curArea);
         }
         
         return maxArea;
