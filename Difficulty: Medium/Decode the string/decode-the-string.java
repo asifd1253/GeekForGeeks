@@ -1,52 +1,45 @@
-
 class Solution {
-    static String decodeString(String s) {
+    static String decodedString(String s) {
         // code here
-        Stack<String> strStack = new Stack<>();
-        Stack<Integer> numStack = new Stack<>();
+        Stack<Integer> numStack=new Stack<>();
+        Stack<String> charStack=new Stack<>();
+        int curNum=0;
         
-        int curNum = 0;
-        for(char ch : s.toCharArray()){
+        for(char ch:s.toCharArray()){
             if(Character.isDigit(ch)){
-                curNum = curNum * 10 + (ch - '0');
-                continue;
-            }
-            
-            if(ch == '['){
+                curNum = curNum*10 + (ch - '0');
+            }else if(ch == '['){
                 numStack.push(curNum);
-                curNum = 0;
-                strStack.push(Character.toString(ch));
-                continue;
-            }
-            
-            
-            if(ch == ']'){
-                StringBuilder sb = new StringBuilder();
-                
-                while(!strStack.isEmpty() && !strStack.peek().equals("[")){
-                    sb.insert(0, strStack.pop());
+                curNum=0;
+                charStack.push(Character.toString(ch));
+            }else if(ch == ']'){
+                String decoded="";
+                while(!charStack.isEmpty() && !charStack.peek().equals("[")){
+                    decoded = charStack.pop() + decoded;
                 }
-                strStack.pop();
                 
+                charStack.pop();
+                
+                String temp = "";
                 int times = 0;
-                if(!numStack.isEmpty()) times = numStack.pop();
-                
-                StringBuilder tempsb = new StringBuilder();
-                for(int i=0; i<times; i++){
-                    tempsb.append(sb.toString());
+                if(!numStack.isEmpty()){
+                    times = numStack.pop();
                 }
                 
-                strStack.push(tempsb.toString());
-            }else{   //remaining alphabets push into the stack
-                strStack.push(Character.toString(ch));
+                for(int i=0; i<times; i++){
+                    temp = temp + decoded;
+                }
+                charStack.push(temp);
+            }else{
+                charStack.push(Character.toString(ch));
             }
         }
         
-        StringBuilder result = new StringBuilder();
-        while(!strStack.isEmpty()){
-            result.insert(0, strStack.pop());
+        String res="";
+        while(!charStack.isEmpty()){
+            res = charStack.pop() + res;
         }
         
-        return result.toString();
+        return res;
     }
 }
